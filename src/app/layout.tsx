@@ -46,15 +46,20 @@ export default function RootLayout({
 }: Readonly<{
 	children: React.ReactNode;
 }>) {
+	const themeCookie = cookies().get("theme");
 	// current theme from cookies
-	const theme = cookies().get("theme")?.value === "dark" ? Theme.dark : Theme.light;
+	const theme = themeCookie
+		? themeCookie.value === "dark"
+			? Theme.dark
+			: Theme.light
+		: Theme.dark;
 
 	return (
 		<html lang="en" className={theme}>
 			<body
 				className={cn(
 					fontSans.variable,
-					"bg-background text-foreground flex min-h-screen flex-col font-sans antialiased",
+					"flex min-h-screen flex-col bg-background font-sans text-foreground antialiased",
 				)}
 			>
 				<header>

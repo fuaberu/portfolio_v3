@@ -52,13 +52,13 @@ export const sendMessage = async ({ email, message, name }: SendMessageProps) =>
 		});
 
 		// Send confirmation email
-		const emailres = await resend.emails.send({
+		await resend.emails.send({
 			from: process.env.EMAIL!,
 			to: email,
 			subject: "Message confirmation",
 			react: ConfirmationEmail({ name }),
 		});
-		console.log(emailres);
+
 		return {
 			success: true,
 		};

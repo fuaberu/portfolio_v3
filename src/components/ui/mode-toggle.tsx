@@ -9,7 +9,9 @@ export function ModeToggle({ theme, text = true }: { theme: Theme; text?: boolea
 
 	const toogleTheme = () => {
 		const root = document.getElementsByTagName("html")[0];
+
 		root.classList.toggle(Theme.dark);
+
 		if (root.classList.contains(Theme.dark)) {
 			setTheme(Theme.dark);
 			document.cookie = `theme=${Theme.dark};path=/;max-age=31536000`;
