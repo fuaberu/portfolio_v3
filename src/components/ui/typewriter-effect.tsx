@@ -53,38 +53,38 @@ export const TypewriterEffectSmooth = ({
 		setInitialWidth((scope.current.offsetWidth / scope.current.parentElement.offsetWidth) * 100);
 	}, []);
 
-	const runRecursiveAnimation = () => {
-		if (!isInView) {
-			return scope.animations.forEach((animation) => animation.stop());
-		}
-		animate(
-			scope.current,
-			{ width: ["0%", initialWidth + "%", initialWidth + "%", "0%"] },
-			{
-				duration: 6,
-				ease: "linear",
-				delay: 1,
-
-				onComplete: () => {
-					onComplete && onComplete();
-					runRecursiveAnimation();
-				},
-				onPlay: () => {
-					animate(
-						scope.current,
-						{ opacity: 1 },
-						{
-							duration: 0.1,
-						},
-					);
-				},
-			},
-		);
-	};
-
 	useEffect(() => {
+		const runRecursiveAnimation = () => {
+			if (!isInView) {
+				return scope.animations.forEach((animation) => animation.stop());
+			}
+			animate(
+				scope.current,
+				{ width: ["0%", initialWidth + "%", initialWidth + "%", "0%"] },
+				{
+					duration: 6,
+					ease: "linear",
+					delay: 1,
+
+					onComplete: () => {
+						onComplete && onComplete();
+						runRecursiveAnimation();
+					},
+					onPlay: () => {
+						animate(
+							scope.current,
+							{ opacity: 1 },
+							{
+								duration: 0.1,
+							},
+						);
+					},
+				},
+			);
+		};
+
 		runRecursiveAnimation();
-	}, [isInView]);
+	}, [isInView, scope]);
 
 	// split text inside of words into array of characters
 	const wordsArray = words.map((word) => {
