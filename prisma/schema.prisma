@@ -1,0 +1,61 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "cockroachdb"
+  url      = env("DATABASE_URL")
+}
+
+model Visit {
+  id             String  @id @default(cuid())
+  city           String?
+  country        String?
+  region         String?
+  latitude       String?
+  longitude      String?
+  model          String?
+  type           String?
+  vendor         String?
+  browserName    String? @map("browser_name")
+  browserVersion String? @map("browser_version")
+  osName         String? @map("os_name")
+  osVersion      String? @map("os_version")
+  isBot          Boolean @default(false) @map("is_bot")
+  ip             String?
+  referrer       String?
+
+  actions  Action[]
+  messages Message[]
+
+  updatedAt DateTime? @updatedAt @map(name: "updated_at")
+  createdAt DateTime  @default(now()) @map(name: "created_at")
+
+  @@map("visits")
+}
+
+model Action {
+  id      String @id @default(cuid())
+  action  String
+  visitId String
+  visit   Visit  @relation(fields: [visitId], references: [id])
+
+  updatedAt DateTime? @updatedAt @map(name: "updated_at")
+  createdAt DateTime  @default(now()) @map(name: "created_at")
+
+  @@map("actions")
+}
+
+model Message {
+  id      String @id @default(cuid())
+  name    String
+  email   String
+  message String @db.String(500)
+  visitId String?
+  visit   Visit?  @relation(fields: [visitId], references: [id])
+
+  updatedAt DateTime? @updatedAt @map(name: "updated_at")
+  createdAt DateTime  @default(now()) @map(name: "created_at")
+
+  @@map("messages")
+}
