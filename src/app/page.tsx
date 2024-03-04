@@ -9,8 +9,8 @@ export default function TracingBeamDemo() {
 		<>
 			<div className="absolute inset-x-0 top-0 -z-10 h-screen">
 				<div className="relative h-full w-full">
-					<div className="bg-background absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px] dark:bg-[radial-gradient(#272727_1px,transparent_1px)]"></div>
-					<div className="from-background absolute inset-x-0 -bottom-5 h-10 bg-gradient-to-t xl:h-32"></div>
+					<div className="absolute inset-0 bg-background bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px] dark:bg-[radial-gradient(#272727_1px,transparent_1px)]"></div>
+					<div className="absolute inset-x-0 -bottom-5 h-10 bg-gradient-to-t from-background xl:h-32"></div>
 				</div>
 			</div>
 			<TracingBeam className="max-w-screen-2xl px-2 md:px-6">

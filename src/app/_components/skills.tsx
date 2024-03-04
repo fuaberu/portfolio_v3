@@ -11,14 +11,14 @@ export const Skills = () => {
 			<SectionTitle title="Skills" />
 			<HoverEffect
 				items={mySkills}
-				className="grid grid-cols-[repeat(auto-fill,minmax(110px,1fr))] md:grid-cols-[repeat(auto-fill,minmax(230px,1fr))]"
+				className="grid grid-cols-[repeat(auto-fill,minmax(150px,1fr))] md:grid-cols-[repeat(auto-fill,minmax(230px,1fr))]"
 			/>
 		</section>
 	);
 };
 const skill = ({ src, title }: { src: string; title: string }) => {
 	return (
-		<div className="relative z-20 flex h-40 w-full cursor-pointer flex-col items-center justify-between gap-8 rounded-2xl bg-zinc-100 p-4 shadow-lg ring-teal-500 transition-all duration-500 group-hover:ring-2 md:h-56 dark:bg-black">
+		<div className="relative z-20 flex h-40 w-full cursor-pointer flex-col items-center justify-between gap-8 rounded-2xl bg-zinc-100 p-4 shadow-lg ring-teal-500 transition-all duration-500 group-hover:ring-2 dark:bg-black md:h-56">
 			<Image src={src} alt={title} width={96} height={96} className="h-16 md:h-24" />
 			<h3 className="text-2xl font-semibold">{title}</h3>
 		</div>

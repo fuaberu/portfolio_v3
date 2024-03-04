@@ -3,26 +3,27 @@
 import { SectionTitle } from "@/components/ui/section-title";
 import { cn } from "@/utils/cn";
 import { motion, useMotionValueEvent, useScroll } from "framer-motion";
+import { ExternalLink, Github } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
 import { useRef, useState } from "react";
 
 const projectsData = [
 	{
-		title: "Project Title",
-		description: "Description",
-		stack: ["Stack"],
-		links: { gitHub: "", demo: "Links" },
+		title: "Fabel",
+		description:
+			"a personalized task management app designed to enhance your organizational efficiency. With the power of the Kanban methodology, it effortlessly breaks down substantial projects into manageable tasks while providing tracking capabilities. The integration of an intuitive calendar further aids in visualizing tasks and maintaining a comprehensive record of your progress.",
+		stack: ["React.js", "Next.js", "TailwindCSS", "Typescript"],
+		images: ["/fabel_landing.png"],
+		links: { gitHub: "https://github.com/fuaberu/Fabel", demo: "https://fabel-ruby.vercel.app/" },
 	},
 	{
-		title: "Project 51611651",
-		description: "Description",
-		stack: ["Stack"],
-		links: { gitHub: "", demo: "Links" },
-	},
-	{
-		title: "Project d56sa1d1as6d16a",
-		description: "Description",
-		stack: ["Stack"],
-		links: { gitHub: "", demo: "Links" },
+		title: "Fabel",
+		description:
+			"A personal task management app. Design to help you stay organized. It uses the Kanban metodology to separate big projects in small tasks, and keep track of them. with the help of a calendar to easly vizualize the tasks and to keep track of them.",
+		stack: ["React.js", "Next.js", "TailwindCSS", "Typescript"],
+		images: ["/fabel_landing.png"],
+		links: { demo: "https://fabel-ruby.vercel.app/" },
 	},
 ];
 
@@ -51,62 +52,118 @@ export const Projects = () => {
 		setActiveProject(closestBreakpointIndex);
 	});
 
-	const backgroundColors = ["var(--slate-900)", "var(--black)", "var(--neutral-900)"];
 	const linearGradients = [
 		"linear-gradient(to bottom right, var(--cyan-500), var(--emerald-500))",
 		"linear-gradient(to bottom right, var(--pink-500), var(--indigo-500))",
-		"linear-gradient(to bottom right, var(--orange-500), var(--yellow-500))",
+		"linear-gradient(to bottom right, var(--red-500), var(--orange-500))",
+		"linear-gradient(to bottom right, var(--teal-500), var(--fuchsia-500))",
+		"linear-gradient(to bottom right, var(--violet-500), var(--pink-500))",
 	];
 	return (
-		<section className="min-h-screen space-y-10 py-6 md:mx-12">
+		<section className="min-h-screen space-y-10 py-6 2xl:mx-36">
 			<SectionTitle title="Projects" />
 			<motion.div
-				animate={{
-					backgroundColor: backgroundColors[activeProject % backgroundColors.length],
-				}}
-				className="relative flex justify-center space-x-10 rounded-md px-10"
+				className="relative flex flex-col rounded-md bg-slate-200 px-10 dark:bg-slate-900"
 				ref={ref}
 			>
-				<div className="div flex flex-1 items-start px-4">
-					<div className="max-w-2xl">
-						{projectsData.map((item, index) => (
-							<div key={item.title + index} className="min-h-96 py-20">
-								<motion.h2
-									initial={{
-										opacity: 0,
-									}}
-									animate={{
-										opacity: activeProject === index ? 1 : 0.3,
-									}}
-									className="text-2xl font-bold text-slate-100"
-								>
-									{item.title}
-								</motion.h2>
-								<motion.p
-									initial={{
-										opacity: 0,
-									}}
-									animate={{
-										opacity: activeProject === index ? 1 : 0.3,
-									}}
-									className="text-kg mt-10 max-w-sm text-slate-300"
-								>
-									{item.description}
-								</motion.p>
+				{projectsData.map((item, index) => (
+					<div
+						key={item.title + index}
+						className="flex min-h-96 flex-col items-center justify-between gap-4 py-10 lg:flex-row lg:items-start"
+					>
+						<div className="space-y-4">
+							<motion.h3
+								initial={{
+									opacity: 0,
+								}}
+								animate={{
+									opacity: activeProject === index ? 1 : 0.2,
+								}}
+								transition={{ duration: 0.1 }}
+								className="text-2xl font-bold"
+							>
+								{item.title}
+							</motion.h3>
+							<motion.p
+								initial={{
+									opacity: 0,
+								}}
+								animate={{
+									opacity: activeProject === index ? 1 : 0.2,
+								}}
+								transition={{ duration: 0.2 }}
+								className="text-kg text-slate-700 dark:text-slate-300 lg:max-w-md"
+							>
+								{item.description}
+							</motion.p>
+							<div className="flex flex-wrap gap-1">
+								{item.stack.map((s, i) => (
+									<motion.span
+										key={s}
+										initial={{
+											opacity: 0,
+										}}
+										animate={{
+											opacity: activeProject === index ? 1 : 0.2,
+											color: activeProject === index ? "var(--teal-300)" : "var(--gray-300)",
+										}}
+										transition={{ duration: 0.2, delay: i * 0.05 }}
+										className="block rounded-3xl bg-gray-600 bg-opacity-70 px-3 py-1 text-xs font-semibold dark:bg-black"
+									>
+										{s}
+									</motion.span>
+								))}
 							</div>
-						))}
+							<motion.div
+								initial={{
+									opacity: 0,
+								}}
+								animate={{
+									opacity: activeProject === index ? 1 : 0.2,
+								}}
+								transition={{ duration: 0.2, delay: 0.1 }}
+								className="hidden flex-wrap gap-2 md:flex"
+							>
+								{item.links.demo && (
+									<Link href={item.links.demo} target="_blank" className="p-1">
+										<ExternalLink />
+									</Link>
+								)}
+								{item.links.gitHub && (
+									<Link href={item.links.gitHub} target="_blank" className="p-1">
+										<Github />
+									</Link>
+								)}
+							</motion.div>
+						</div>
+						<motion.div
+							animate={{
+								background:
+									activeProject === index
+										? linearGradients[index]
+										: "linear-gradient(to bottom right, var(--gray-500), var(--gray-800))",
+								height: activeProject === index ? "300px" : "250px",
+								width: activeProject === index ? "534px" : "445px",
+								opacity: activeProject === index ? 1 : 0.2,
+								filter: activeProject === index ? "none" : "grayscale(1)",
+							}}
+							transition={{ duration: 0.3, ease: "easeInOut" }}
+							className={cn("rounded-md bg-white shadow")}
+						>
+							<div className="relative h-full w-full">
+								<div className="absolute inset-1 overflow-hidden rounded-md bg-black">
+									<Image
+										src={item.images[0]}
+										alt={item.title}
+										width={534}
+										height={300}
+										className="min-w-0"
+									/>
+								</div>
+							</div>
+						</motion.div>
 					</div>
-				</div>
-				<motion.div
-					animate={{
-						background: linearGradients[activeProject % linearGradients.length],
-					}}
-					className={cn(
-						"sticky top-[calc(50vh-144px)] my-10 hidden h-72 w-96 overflow-hidden rounded-md bg-white lg:block",
-					)}
-				>
-					{projectsData[activeProject].title ?? null}
-				</motion.div>
+				))}
 			</motion.div>
 		</section>
 	);
@@ -120,12 +177,7 @@ const Project = ({}: {
 }) => {
 	return (
 		<motion.div className="w-full rounded-xl bg-teal-300 p-6">
-			<div>
-				<h3 className="text-2xl font-semibold">Project Title</h3>
-				<p>Description</p>
-				<div>Stack</div>
-				<div>Links</div>
-			</div>
+			<div></div>
 		</motion.div>
 	);
 };

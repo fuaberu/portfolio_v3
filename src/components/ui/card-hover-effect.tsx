@@ -14,7 +14,7 @@ export const HoverEffect = ({ items, className }: { items: ReactNode[]; classNam
 					onMouseEnter={() => setHoveredIndex(idx)}
 					onMouseLeave={() => setHoveredIndex(null)}
 					initial={{ opacity: 0 }}
-					transition={{ duration: 1, delay: 0.5 + idx * 0.05 }}
+					transition={{ duration: 1, delay: 0.4 + idx * 0.05 }}
 					whileInView={{ opacity: 1 }}
 					viewport={{ once: true }}
 				>

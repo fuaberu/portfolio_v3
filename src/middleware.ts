@@ -6,7 +6,7 @@ export async function middleware(request: NextRequest) {
 
 	let response = NextResponse.next();
 
-	if (!request.cookies.get("visit")) {
+	if (!request.cookies.get("visit") && process.env.NODE_ENV === "production") {
 		const data = { geo, device, browser, isBot, os, ip, referrer };
 
 		const visit = await fetch(process.env.NEXT_PUBLIC_SITE_URL + "/api/visits", {
