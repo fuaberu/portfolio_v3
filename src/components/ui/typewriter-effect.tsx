@@ -51,7 +51,7 @@ export const TypewriterEffectSmooth = ({
 
 	useEffect(() => {
 		setInitialWidth((scope.current.offsetWidth / scope.current.parentElement.offsetWidth) * 100);
-	}, []);
+	}, [scope]);
 
 	useEffect(() => {
 		const runRecursiveAnimation = () => {
@@ -84,7 +84,7 @@ export const TypewriterEffectSmooth = ({
 		};
 
 		runRecursiveAnimation();
-	}, [isInView, scope]);
+	}, [isInView, scope, animate, initialWidth]);
 
 	// split text inside of words into array of characters
 	const wordsArray = words.map((word) => {
