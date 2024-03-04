@@ -13,7 +13,7 @@ export const ConfirmationEmail = ({ name }: Props) => {
 				<Container style={container}>
 					{process.env.NEXT_PUBLIC_SITE_URL && (
 						<Img
-							src={`${process.env.NEXT_PUBLIC_SITE_URL}/logo.svg`}
+							src={`${process.env.NEXT_PUBLIC_SITE_URL}/logo.png`}
 							width="60"
 							height="60"
 							alt="Logo"
