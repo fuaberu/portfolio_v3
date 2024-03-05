@@ -38,7 +38,7 @@ export const Projects = () => {
 		// uncomment line 22 and comment line 23 if you DONT want the overflow container and want to have it change on the entire page scroll
 		target: ref,
 		// container: ref,
-		offset: ["start center", "end start"],
+		offset: ["start start", "end center"],
 	});
 
 	const [windowInnerWidth, setWindowInnerWidth] = useState(0);
@@ -147,7 +147,7 @@ export const Projects = () => {
 									<Link
 										href={item.links.demo}
 										target="_blank"
-										className="p-1"
+										className="p-1 hover:text-teal-400"
 										aria-label={`Open ${item.title} demo`}
 										onClick={() => registerAction({ action: "open-demo", description: item.title })}
 									>
@@ -158,7 +158,7 @@ export const Projects = () => {
 									<Link
 										href={item.links.gitHub}
 										target="_blank"
-										className="p-1"
+										className="p-1 hover:text-teal-400"
 										aria-label={`Open ${item.title} gitHub`}
 										onClick={() =>
 											registerAction({ action: "open-github", description: item.title })
@@ -194,7 +194,7 @@ export const Projects = () => {
 										alt={item.title}
 										fill
 										sizes="(max-width: 1024px) 100%, 534px"
-										className="w-full object-cover object-center"
+										className="w-full rounded-md object-cover object-center"
 										priority
 									/>
 								</div>
