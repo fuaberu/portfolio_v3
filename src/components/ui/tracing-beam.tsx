@@ -15,13 +15,18 @@ export const TracingBeam = ({
 
 	const { scrollYProgress } = useScroll();
 
-	const contentRef = useRef<HTMLDivElement>(null);
 	const [svgHeight, setSvgHeight] = useState(0);
 
 	useEffect(() => {
-		if (contentRef.current) {
-			setSvgHeight(contentRef.current.offsetHeight);
-		}
+		if (!ref.current) return;
+
+		const resizeObserver = new ResizeObserver(() => {
+			setSvgHeight(ref.current?.offsetHeight || 0);
+		});
+
+		resizeObserver.observe(ref.current);
+
+		return () => resizeObserver.disconnect(); // clean up
 	}, []);
 
 	const y1 = useSpring(useTransform(scrollYProgress, [0, 0.8], [50, svgHeight]), {
@@ -38,7 +43,7 @@ export const TracingBeam = ({
 			ref={ref}
 			className={cn("relative mx-auto h-full w-full max-w-screen-xl", className)}
 		>
-			<div className="absolute -left-7 top-0 md:-left-4">
+			<div className="absolute -left-7 bottom-0 top-0 md:-left-4">
 				<svg
 					viewBox={`0 0 20 ${svgHeight}`}
 					width="20"
@@ -75,9 +80,7 @@ export const TracingBeam = ({
 					</defs>
 				</svg>
 			</div>
-			<div ref={contentRef} className="pb-6">
-				{children}
-			</div>
+			<div className="pb-6">{children}</div>
 		</motion.div>
 	);
 };

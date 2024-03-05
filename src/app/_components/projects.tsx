@@ -172,6 +172,7 @@ export const Projects = () => {
 										src={item.images[0]}
 										alt={item.title}
 										fill
+										sizes="(max-width: 1024px) 100%, 534px"
 										className="w-full object-cover object-center"
 										priority
 									/>

@@ -19,7 +19,7 @@ export const Skills = () => {
 const skill = ({ src, title }: { src: string; title: string }) => {
 	return (
 		<div className="relative z-20 flex h-40 w-full cursor-pointer flex-col items-center justify-between gap-8 rounded-2xl bg-zinc-100 p-4 shadow-lg ring-teal-500 transition-all duration-500 group-hover:ring-2 dark:bg-black md:h-56">
-			<Image src={src} alt={title} width={96} height={96} className="h-16 md:h-24" />
+			<Image src={src} alt={title} width={96} height={96} className="h-16 w-auto md:h-24" />
 			<h3 className="text-2xl font-semibold">{title}</h3>
 		</div>
 	);
