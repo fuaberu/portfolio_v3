@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse, userAgent } from "next/server";
-import { addHours } from "date-fns";
 
 export async function middleware(request: NextRequest) {
 	const { geo, ip, referrer } = request;
@@ -13,6 +12,7 @@ export async function middleware(request: NextRequest) {
 		const data = { geo, device, browser, isBot, os, ip, referrer };
 
 		let visitId = visitCookie?.value;
+
 		if (!visitId) {
 			const visit = await fetch(process.env.NEXT_PUBLIC_SITE_URL + "/api/visits", {
 				method: "POST",
@@ -30,7 +30,7 @@ export async function middleware(request: NextRequest) {
 				secure: true,
 				sameSite: true,
 				path: "/",
-				expires: addHours(new Date(), 1),
+				maxAge: 60 * 60,
 			});
 		}
 	}
@@ -39,5 +39,11 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-	matcher: ["/((?!.+\\.[\\w]+$|_next).*)", "/", "/(api)(.*)"],
+	matcher: {
+		source: "/((?!api|_next/static|_next/image|favicon.ico|logo.png|resume.pdf|logo.svg).*)",
+		missing: [
+			{ type: "header", key: "next-router-prefetch" },
+			{ type: "header", key: "purpose", value: "prefetch" },
+		],
+	},
 };
