@@ -6,7 +6,7 @@ import { motion, useMotionValueEvent, useScroll } from "framer-motion";
 import { ExternalLink, Github } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { registerAction } from "../actions";
 
 const projectsData = [
@@ -41,6 +41,17 @@ export const Projects = () => {
 		offset: ["start center", "end start"],
 	});
 
+	const [windowInnerWidth, setWindowInnerWidth] = useState(0);
+
+	useEffect(() => {
+		setWindowInnerWidth(window.innerWidth);
+
+		window.addEventListener("resize", () => setWindowInnerWidth(window.innerWidth));
+
+		return (): void =>
+			window.removeEventListener("resize", () => setWindowInnerWidth(window.innerWidth));
+	}, []);
+
 	const cardLength = projectsData.length;
 
 	useMotionValueEvent(scrollYProgress, "change", (latest) => {
@@ -67,7 +78,7 @@ export const Projects = () => {
 		<section className="relative min-h-screen space-y-10 py-6 2xl:mx-36">
 			<SectionTitle title="Projects" />
 			<motion.div
-				className="relative flex flex-col rounded-md bg-slate-200 px-10 dark:bg-slate-900"
+				className="relative flex flex-col rounded-md bg-slate-200 px-4 dark:bg-slate-900 lg:px-10"
 				ref={ref}
 			>
 				{projectsData.map((item, index) => (
@@ -126,7 +137,7 @@ export const Projects = () => {
 									opacity: activeProject === index ? 1 : 0.2,
 								}}
 								transition={{ duration: 0.2, delay: 0.1 }}
-								className="hidden flex-wrap gap-2 md:flex"
+								className="flex flex-wrap gap-2"
 							>
 								{item.links.demo && (
 									<Link
@@ -158,16 +169,20 @@ export const Projects = () => {
 									activeProject === index
 										? linearGradients[index]
 										: "linear-gradient(to bottom right, var(--gray-500), var(--gray-800))",
-								height: activeProject === index ? "300px" : "250px",
-								width: activeProject === index ? "534px" : "445px",
+								scale: activeProject === index ? (windowInnerWidth > 1250 ? 1.2 : 1) : 1,
 								opacity: activeProject === index ? 1 : 0.2,
 								filter: activeProject === index ? "grayscale(0)" : "grayscale(1)",
 							}}
 							transition={{ duration: 0.3, ease: "easeInOut" }}
-							className={cn("h-fit max-w-full rounded-md bg-white shadow")}
+							className={cn(
+								"my-4 aspect-video w-full max-w-[534px] origin-center rounded-md bg-white shadow",
+								index === projectsData.length - 1
+									? "lg:origin-bottom-right"
+									: "lg:origin-top-right",
+							)}
 						>
 							<div className="relative h-full w-full">
-								<div className="absolute inset-1 rounded-md bg-black">
+								<div className="absolute inset-1 min-h-0 rounded-md bg-black">
 									<Image
 										src={item.images[0]}
 										alt={item.title}
