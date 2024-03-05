@@ -3,8 +3,6 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from "framer-motion";
 import { cn } from "@/utils/cn";
-import Link from "next/link";
-import { registerAction } from "@/app/actions";
 import { AppLink } from "./link";
 import { ModeToggle } from "./mode-toggle";
 import { Theme } from "@/types";
@@ -73,8 +71,8 @@ export const FloatingNav = ({
 						href={navItem.link}
 						className={cn("flex items-center gap-1")}
 					>
-						<span className="xs:hidden block">{navItem.icon}</span>
-						<span className="xs:block hidden text-sm">{navItem.name}</span>
+						<span className="block xs:hidden">{navItem.icon}</span>
+						<span className="hidden text-sm xs:block">{navItem.name}</span>
 					</AppLink>
 				))}
 				<div className="ml-auto flex items-center gap-3">

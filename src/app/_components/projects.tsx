@@ -12,18 +12,21 @@ const projectsData = [
 	{
 		title: "Fabel",
 		description:
-			"a personalized task management app designed to enhance your organizational efficiency. With the power of the Kanban methodology, it effortlessly breaks down substantial projects into manageable tasks while providing tracking capabilities. The integration of an intuitive calendar further aids in visualizing tasks and maintaining a comprehensive record of your progress.",
-		stack: ["React.js", "Next.js", "TailwindCSS", "Typescript"],
+			"A personalized task management app designed to enhance your organizational efficiency. With the power of the Kanban methodology, it effortlessly breaks down substantial projects into manageable tasks while providing tracking capabilities. The integration of an intuitive calendar further aids in visualizing tasks and maintaining a comprehensive record of your progress.",
+		stack: ["React.js", "Next.js", "TailwindCSS", "Typescript", "PostgreSQL"],
 		images: ["/fabel_landing.png"],
 		links: { gitHub: "https://github.com/fuaberu/Fabel", demo: "https://fabel-ruby.vercel.app/" },
 	},
 	{
-		title: "Fabel",
+		title: "Water Tracker",
 		description:
-			"A personal task management app. Design to help you stay organized. It uses the Kanban metodology to separate big projects in small tasks, and keep track of them. with the help of a calendar to easly vizualize the tasks and to keep track of them.",
-		stack: ["React.js", "Next.js", "TailwindCSS", "Typescript"],
-		images: ["/fabel_landing.png"],
-		links: { demo: "https://fabel-ruby.vercel.app/" },
+			"A personal app to track your daily water awmount intake. It allows you to enter the amount of water consumed and the day it was consumed. The app also provides an interactive chart that displays your water intake over time.",
+		stack: ["React.js", "Firebase", "TailwindCSS", "Typescript"],
+		images: ["/water_reminder_home.png"],
+		links: {
+			gitHub: "https://github.com/fuaberu/water-daily-intake",
+			demo: "https://water-reminder-web.web.app/",
+		},
 	},
 ];
 
