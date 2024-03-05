@@ -164,16 +164,15 @@ export const Projects = () => {
 								filter: activeProject === index ? "grayscale(0)" : "grayscale(1)",
 							}}
 							transition={{ duration: 0.3, ease: "easeInOut" }}
-							className={cn("rounded-md bg-white shadow")}
+							className={cn("h-fit max-w-full rounded-md bg-white shadow")}
 						>
 							<div className="relative h-full w-full">
-								<div className="absolute inset-1 overflow-hidden rounded-md bg-black">
+								<div className="absolute inset-1 rounded-md bg-black">
 									<Image
 										src={item.images[0]}
 										alt={item.title}
-										width={534}
-										height={300}
-										className="min-w-0"
+										fill
+										className="w-full object-cover object-center"
 										priority
 									/>
 								</div>
