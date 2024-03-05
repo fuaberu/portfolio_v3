@@ -20,6 +20,10 @@ export const registerAction = async ({ action, description }: RegisterActionProp
 		return;
 	}
 
+	if (action === "close-window") {
+		cookies().delete("visit");
+	}
+
 	await db.action.create({
 		data: {
 			visitId: visit.value,
