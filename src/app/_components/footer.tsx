@@ -20,7 +20,7 @@ const Footer = ({ theme }: { theme: Theme }) => {
 				</div>
 				<nav className="flex flex-col justify-evenly">
 					<AppLink href="/">Home</AppLink>
-					<AppLink href="/about">About</AppLink>
+					{/* <AppLink href="/about">About</AppLink> */}
 					<AppLink href="/contact">Contact</AppLink>
 				</nav>
 			</div>
