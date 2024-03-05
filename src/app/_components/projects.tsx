@@ -80,6 +80,10 @@ export const Projects = () => {
 			<motion.div
 				className="relative flex flex-col rounded-md bg-slate-200 px-4 dark:bg-slate-900 lg:px-10"
 				ref={ref}
+				initial={{ opacity: 0 }}
+				transition={{ duration: 0.2 }}
+				whileInView={{ opacity: 1 }}
+				viewport={{ once: true }}
 			>
 				{projectsData.map((item, index) => (
 					<div
@@ -144,6 +148,7 @@ export const Projects = () => {
 										href={item.links.demo}
 										target="_blank"
 										className="p-1"
+										aria-label={`Open ${item.title} demo`}
 										onClick={() => registerAction({ action: "open-demo", description: item.title })}
 									>
 										<ExternalLink />
@@ -154,6 +159,7 @@ export const Projects = () => {
 										href={item.links.gitHub}
 										target="_blank"
 										className="p-1"
+										aria-label={`Open ${item.title} gitHub`}
 										onClick={() =>
 											registerAction({ action: "open-github", description: item.title })
 										}

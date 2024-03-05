@@ -18,6 +18,7 @@ import {
 import { sendMessage } from "@/app/actions";
 import { toast } from "sonner";
 import { BottomGradient } from "../../components/bottom-gradient";
+import { motion } from "framer-motion";
 
 const formSchema = z.object({
 	name: z.string().min(2).max(50),
@@ -53,7 +54,13 @@ export const GetInTouchForm = () => {
 	}
 
 	return (
-		<div className="mx-auto w-full max-w-md rounded-2xl bg-white p-4 shadow-input dark:bg-black md:p-8">
+		<motion.div
+			initial={{ opacity: 0 }}
+			transition={{ duration: 0.2 }}
+			whileInView={{ opacity: 1 }}
+			viewport={{ once: true }}
+			className="mx-auto w-full max-w-md rounded-2xl bg-white p-4 shadow-input dark:bg-black md:p-8"
+		>
 			<h2 className="text-xl font-bold text-neutral-800 dark:text-neutral-200">Get in touch</h2>
 			<p className="mt-2 max-w-sm text-sm text-neutral-600 dark:text-neutral-300">
 				Send me a message and I will get back to you as soon as I can.
@@ -137,7 +144,7 @@ export const GetInTouchForm = () => {
 					</div>
 				</form>
 			</Form>
-		</div>
+		</motion.div>
 	);
 };
 
