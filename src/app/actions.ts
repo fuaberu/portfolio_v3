@@ -6,19 +6,25 @@ import { cookies } from "next/headers";
 import { ConfirmationEmail } from "@/emails/ConfirmationEmail";
 
 interface RegisterActionProps {
-	action: "download-resume";
+	action: "download-resume" | "open-demo" | "open-github" | "close-window" | "page-load";
+	description?: string;
 }
-export const registerAction = async ({ action }: RegisterActionProps) => {
+export const registerAction = async ({ action, description }: RegisterActionProps) => {
+	if (process.env.NODE_ENV !== "production") {
+		return console.log({ action, description });
+	}
+
 	const visit = cookies().get("visit");
 
 	if (!visit) {
-		return null;
+		return;
 	}
 
 	await db.action.create({
 		data: {
 			visitId: visit.value,
 			action,
+			description,
 		},
 	});
 };
@@ -30,6 +36,10 @@ interface SendMessageProps {
 }
 export const sendMessage = async ({ email, message, name }: SendMessageProps) => {
 	const visit = cookies().get("visit");
+
+	if (process.env.NODE_ENV !== "production") {
+		return { success: true };
+	}
 
 	try {
 		if (visit) {

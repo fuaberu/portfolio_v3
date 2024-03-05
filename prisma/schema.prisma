@@ -37,6 +37,7 @@ model Visit {
 model Action {
   id      String @id @default(cuid())
   action  String
+  description String?
   visitId String
   visit   Visit  @relation(fields: [visitId], references: [id])
 

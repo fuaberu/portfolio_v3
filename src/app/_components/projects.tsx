@@ -7,6 +7,7 @@ import { ExternalLink, Github } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRef, useState } from "react";
+import { registerAction } from "../actions";
 
 const projectsData = [
 	{
@@ -63,7 +64,7 @@ export const Projects = () => {
 		"linear-gradient(to bottom right, var(--violet-500), var(--pink-500))",
 	];
 	return (
-		<section className="min-h-screen space-y-10 py-6 2xl:mx-36">
+		<section className="relative min-h-screen space-y-10 py-6 2xl:mx-36">
 			<SectionTitle title="Projects" />
 			<motion.div
 				className="relative flex flex-col rounded-md bg-slate-200 px-10 dark:bg-slate-900"
@@ -128,12 +129,24 @@ export const Projects = () => {
 								className="hidden flex-wrap gap-2 md:flex"
 							>
 								{item.links.demo && (
-									<Link href={item.links.demo} target="_blank" className="p-1">
+									<Link
+										href={item.links.demo}
+										target="_blank"
+										className="p-1"
+										onClick={() => registerAction({ action: "open-demo", description: item.title })}
+									>
 										<ExternalLink />
 									</Link>
 								)}
 								{item.links.gitHub && (
-									<Link href={item.links.gitHub} target="_blank" className="p-1">
+									<Link
+										href={item.links.gitHub}
+										target="_blank"
+										className="p-1"
+										onClick={() =>
+											registerAction({ action: "open-github", description: item.title })
+										}
+									>
 										<Github />
 									</Link>
 								)}
@@ -148,7 +161,7 @@ export const Projects = () => {
 								height: activeProject === index ? "300px" : "250px",
 								width: activeProject === index ? "534px" : "445px",
 								opacity: activeProject === index ? 1 : 0.2,
-								filter: activeProject === index ? "none" : "grayscale(1)",
+								filter: activeProject === index ? "grayscale(0)" : "grayscale(1)",
 							}}
 							transition={{ duration: 0.3, ease: "easeInOut" }}
 							className={cn("rounded-md bg-white shadow")}
@@ -161,6 +174,7 @@ export const Projects = () => {
 										width={534}
 										height={300}
 										className="min-w-0"
+										priority
 									/>
 								</div>
 							</div>

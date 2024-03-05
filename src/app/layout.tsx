@@ -2,12 +2,13 @@ import "./globals.css";
 import type { Metadata, Viewport } from "next";
 import { Inter as FontSans } from "next/font/google";
 import { FloatingNav } from "@/components/ui/floating-navbar";
-import { AtSign, Home, User } from "lucide-react";
+import { AtSign, Home } from "lucide-react";
 import { cn } from "@/utils/cn";
 import { Toaster } from "@/components/ui/sonner";
 import Footer from "@/app/_components/footer";
 import { cookies } from "next/headers";
 import { Theme } from "@/types";
+import { BeforeUnloads } from "./_components/before-unloads";
 
 const fontSans = FontSans({
 	subsets: ["latin"],
@@ -55,7 +56,7 @@ export default function RootLayout({
 		: Theme.dark;
 
 	return (
-		<html lang="en" className={theme}>
+		<html lang="en" className={cn("relative", theme)}>
 			<body
 				className={cn(
 					fontSans.variable,
@@ -68,6 +69,7 @@ export default function RootLayout({
 				<main className="relative mx-auto w-full flex-1">{children}</main>
 				<Footer theme={theme} />
 				<Toaster />
+				<BeforeUnloads />
 			</body>
 		</html>
 	);
