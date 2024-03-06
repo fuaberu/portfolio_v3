@@ -59,6 +59,13 @@ export async function POST(request: NextRequest) {
 			},
 		});
 
+		await db.action.create({
+			data: {
+				visitId: newVisit.id,
+				action: "first-visit",
+			},
+		});
+
 		return new NextResponse(newVisit.id, {
 			status: 201,
 		});

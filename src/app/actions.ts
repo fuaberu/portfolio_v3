@@ -4,9 +4,16 @@ import { db } from "@/lib/db";
 import { resend } from "@/lib/resend";
 import { cookies } from "next/headers";
 import { ConfirmationEmail } from "@/emails/ConfirmationEmail";
+import { NotificationMeEmail } from "@/emails/NotificationMeEmail";
 
 interface RegisterActionProps {
-	action: "download-resume" | "open-demo" | "open-github" | "close-window" | "page-load";
+	action:
+		| "first-visit"
+		| "download-resume"
+		| "open-demo"
+		| "open-github"
+		| "close-window"
+		| "page-load";
 	description?: string;
 }
 export const registerAction = async ({ action, description }: RegisterActionProps) => {
@@ -67,6 +74,14 @@ export const sendMessage = async ({ email, message, name }: SendMessageProps) =>
 			to: email,
 			subject: "Message confirmation",
 			react: ConfirmationEmail({ name }),
+		});
+
+		// Notify me
+		await resend.emails.send({
+			from: process.env.EMAIL!,
+			to: process.env.PRIVATE_EMAIL!,
+			subject: "Message confirmation",
+			react: NotificationMeEmail({ name, email, message }),
 		});
 
 		return {

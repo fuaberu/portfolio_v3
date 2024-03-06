@@ -16,7 +16,7 @@ export const BeforeUnloads = () => {
 	}, [pathname, searchParams]);
 
 	useEffect(() => {
-		const handleWindowClose = () => {
+		const handleWindowClose = (_: BeforeUnloadEvent) => {
 			registerAction({
 				action: "close-window",
 			});
