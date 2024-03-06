@@ -94,3 +94,25 @@ export const sendMessage = async ({ email, message, name }: SendMessageProps) =>
 		};
 	}
 };
+
+export const verifyPassword = async (password: string) => {
+	if (password !== process.env.STATS_PASSWORD_COOKIE) {
+		return {
+			success: false,
+		};
+	}
+
+	cookies().set({
+		name: process.env.STATS_PASSWORD_COOKIE_NAME!,
+		value: process.env.STATS_PASSWORD_COOKIE_VALUE!,
+		maxAge: 60 * 60,
+		path: "/",
+		secure: true,
+		httpOnly: true,
+		sameSite: "strict",
+	});
+
+	return {
+		success: true,
+	};
+};
