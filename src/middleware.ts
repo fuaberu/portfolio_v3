@@ -1,17 +1,16 @@
 import { NextRequest, NextResponse, userAgent } from "next/server";
 
 export async function middleware(request: NextRequest) {
-	const { geo, ip, referrer } = request;
-	const { device, browser, isBot, os } = userAgent(request);
-
 	let response = NextResponse.next();
 
 	const visitCookie = request.cookies.get("visit");
 
-	if (process.env.NODE_ENV === "production") {
-		const data = { geo, device, browser, isBot, os, ip, referrer };
+	let visitId = visitCookie?.value;
+	if (process.env.NODE_ENV === "production" && request.method === "GET") {
+		const { geo, ip, referrer } = request;
+		const { device, browser, isBot, os } = userAgent(request);
 
-		let visitId = visitCookie?.value;
+		const data = { geo, device, browser, isBot, os, ip, referrer };
 
 		if (!visitId) {
 			const visit = await fetch(process.env.NEXT_PUBLIC_SITE_URL + "/api/visits", {
@@ -23,16 +22,16 @@ export async function middleware(request: NextRequest) {
 				visitId = await visit.text();
 			}
 		}
+	}
 
-		if (visitId) {
-			response.cookies.set("visit", visitId, {
-				httpOnly: true,
-				secure: true,
-				sameSite: true,
-				path: "/",
-				maxAge: 60 * 60,
-			});
-		}
+	if (visitId) {
+		response.cookies.set("visit", visitId, {
+			httpOnly: true,
+			secure: true,
+			sameSite: true,
+			path: "/",
+			maxAge: 60 * 60,
+		});
 	}
 
 	return response;
