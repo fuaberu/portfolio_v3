@@ -5,6 +5,7 @@ import { LineStats } from "@/components/ui/line-stats";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { cookies } from "next/headers";
 import { PasswordPromptDialog } from "@/components/password-prompt";
+import { Visit } from "@prisma/client";
 
 const page = async () => {
 	const loginCookies = cookies().get(process.env.STATS_PASSWORD_COOKIE_NAME!);
@@ -26,6 +27,11 @@ const page = async () => {
 			},
 			messages: { select: { id: true } },
 			country: true,
+			isBot: true,
+			browserName: true,
+			browserVersion: true,
+			osName: true,
+			osVersion: true,
 		},
 		orderBy: { createdAt: "desc" },
 	});
@@ -43,20 +49,40 @@ const page = async () => {
 		};
 	});
 
-	const contriesData: { [key: string]: number } = {};
+	const contriesData: { [key: string]: { users: number; bot: number } } = {};
+
+	const isVisitBot = (
+		visit: Pick<Visit, "isBot" | "browserName" | "browserVersion" | "osName" | "osVersion">,
+	) => {
+		return (
+			visit.isBot ||
+			!visit.browserName ||
+			!visit.browserVersion ||
+			!visit.osName ||
+			!visit.osVersion
+		);
+	};
 
 	visits.forEach((visit) => {
 		if (!visit.country) return;
 
-		if (typeof contriesData[visit.country] === "number") {
-			contriesData[visit.country] += 1;
+		if (!contriesData[visit.country]) {
+			if (isVisitBot(visit)) {
+				contriesData[visit.country] = { users: 0, bot: 1 };
+			} else {
+				contriesData[visit.country] = { users: 1, bot: 0 };
+			}
 		} else {
-			contriesData[visit.country] = 1;
+			if (isVisitBot(visit)) {
+				contriesData[visit.country].bot += 1;
+			} else {
+				contriesData[visit.country].users += 1;
+			}
 		}
 	});
 
-	const chartData = Object.entries(contriesData).map(([key, value]) => {
-		return { key, value };
+	const chartData = Object.entries(contriesData).map(([key, { users, bot }]) => {
+		return { key, users, bot };
 	});
 
 	return (

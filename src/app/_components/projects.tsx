@@ -4,10 +4,10 @@ import { SectionTitle } from "@/components/ui/section-title";
 import { cn } from "@/utils/cn";
 import { motion, useMotionValueEvent, useScroll } from "framer-motion";
 import { ExternalLink, Github } from "lucide-react";
-import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { registerAction } from "../actions";
+import { ProjectsCarousel } from "./projects-carousel";
 
 const projectsData = [
 	{
@@ -15,7 +15,7 @@ const projectsData = [
 		description:
 			"A personalized task management app designed to enhance your organizational efficiency. With the power of the Kanban methodology, it effortlessly breaks down substantial projects into manageable tasks while providing tracking capabilities. The integration of an intuitive calendar further aids in visualizing tasks and maintaining a comprehensive record of your progress.",
 		stack: ["React.js", "Next.js", "TailwindCSS", "Typescript", "PostgreSQL"],
-		images: ["/fabel_landing.png"],
+		images: ["/fabel_landing.png", "/fabel_kanban.png", "/fabel_calendar.png"],
 		links: { gitHub: "https://github.com/fuaberu/Fabel", demo: "https://fabel-ruby.vercel.app/" },
 	},
 	{
@@ -67,13 +67,6 @@ export const Projects = () => {
 		setActiveProject(closestBreakpointIndex);
 	});
 
-	const linearGradients = [
-		"linear-gradient(to bottom right, var(--cyan-500), var(--emerald-500))",
-		"linear-gradient(to bottom right, var(--pink-500), var(--indigo-500))",
-		"linear-gradient(to bottom right, var(--red-500), var(--orange-500))",
-		"linear-gradient(to bottom right, var(--teal-500), var(--fuchsia-500))",
-		"linear-gradient(to bottom right, var(--violet-500), var(--pink-500))",
-	];
 	return (
 		<section className="relative min-h-screen space-y-10 py-6 2xl:mx-36">
 			<SectionTitle title="Projects" />
@@ -88,7 +81,13 @@ export const Projects = () => {
 				{projectsData.map((item, index) => (
 					<div
 						key={item.title + index}
-						className="flex min-h-96 flex-col items-center justify-between gap-4 py-10 lg:flex-row lg:items-start"
+						className={cn(
+							"flex min-h-96 flex-col items-center justify-between gap-4 py-10 lg:flex-row lg:items-start",
+							{
+								"pt-20": index === projectsData.length - 1,
+								"pb-20": index === 0,
+							},
+						)}
 					>
 						<div className="space-y-4">
 							<motion.h3
@@ -169,7 +168,18 @@ export const Projects = () => {
 								)}
 							</motion.div>
 						</div>
-						<motion.div
+						<ProjectsCarousel
+							active={activeProject === index}
+							images={item.images}
+							className={cn(
+								"origin-center bg-white shadow",
+								index === projectsData.length - 1
+									? "lg:origin-bottom-right"
+									: "lg:origin-top-right",
+							)}
+						/>
+
+						{/* <motion.div
 							animate={{
 								background:
 									activeProject === index
@@ -199,7 +209,7 @@ export const Projects = () => {
 									/>
 								</div>
 							</div>
-						</motion.div>
+						</motion.div> */}
 					</div>
 				))}
 			</motion.div>
