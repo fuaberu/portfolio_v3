@@ -1,14 +1,10 @@
 import "./globals.css";
 import type { Metadata, Viewport } from "next";
 import { Inter as FontSans } from "next/font/google";
-import { FloatingNav } from "@/components/ui/floating-navbar";
-import { AtSign, Home } from "lucide-react";
 import { cn } from "@/utils/cn";
 import { Toaster } from "@/components/ui/sonner";
-import Footer from "@/app/_components/footer";
 import { cookies } from "next/headers";
 import { Theme } from "@/types";
-import { BeforeUnloads } from "./_components/before-unloads";
 
 const fontSans = FontSans({
 	subsets: ["latin"],
@@ -16,10 +12,6 @@ const fontSans = FontSans({
 });
 
 export const metadata: Metadata = {
-	title: {
-		template: "%s | Portfolio",
-		default: "Portfolio",
-	},
 	authors: {
 		name: "Kevin Alves Fabel",
 		url: "https://www.linkedin.com/in/kevin-fabel/",
@@ -33,8 +25,8 @@ export const metadata: Metadata = {
 		},
 	],
 	description:
-		"Kevin Alves Fabel's portfolio. I'm a software engineer who loves building beautiful, performant, and scalable web applications.",
-	keywords: ["kevin alves fabel", "portfolio"],
+		"Kevin Alves Fabel's personal website. I'm a software engineer who loves building beautiful, performant, and scalable web applications.",
+	keywords: ["kevin alves fabel", "personal website"],
 };
 
 export const viewport: Viewport = {
@@ -63,32 +55,9 @@ export default function RootLayout({
 					"flex min-h-screen flex-col bg-background font-sans text-foreground antialiased",
 				)}
 			>
-				<header>
-					<FloatingNav navItems={navItems} theme={theme} />
-				</header>
-				<main className="relative mx-auto w-full flex-1">{children}</main>
-				<Footer theme={theme} />
+				{children}
 				<Toaster />
-				<BeforeUnloads />
 			</body>
 		</html>
 	);
 }
-
-const navItems = [
-	{
-		name: "Home",
-		link: "/",
-		icon: <Home className="h-4 w-4 text-neutral-500 dark:text-white" />,
-	},
-	// {
-	// 	name: "About",
-	// 	link: "/about",
-	// 	icon: <User className="h-4 w-4 text-neutral-500 dark:text-white" />,
-	// },
-	{
-		name: "Contact",
-		link: "/contact",
-		icon: <AtSign className="h-4 w-4 text-neutral-500 dark:text-white" />,
-	},
-];

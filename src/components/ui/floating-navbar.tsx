@@ -12,6 +12,7 @@ export const FloatingNav = ({
 	navItems,
 	className,
 	theme,
+	isAgency,
 }: {
 	navItems: {
 		name: string;
@@ -20,6 +21,7 @@ export const FloatingNav = ({
 	}[];
 	theme: Theme;
 	className?: string;
+	isAgency?: boolean;
 }) => {
 	const { scrollYProgress } = useScroll();
 
@@ -30,7 +32,9 @@ export const FloatingNav = ({
 		if (typeof current === "number") {
 			let direction = current! - (scrollYProgress.getPrevious() || 0);
 
-			if (current < 0.05) {
+			if (current === 1 && scrollYProgress.getPrevious() === 0) {
+				setVisible(true);
+			} else if (current < 0.05) {
 				setVisible(true);
 			} else if (current >= 1) {
 				setVisible(false);
@@ -61,7 +65,7 @@ export const FloatingNav = ({
 					duration: 0.2,
 				}}
 				className={cn(
-					"fixed inset-x-2 top-2 z-[5000] mx-auto flex max-w-screen-2xl items-center gap-6 rounded-xl border border-transparent bg-white px-8 py-4 shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] dark:border-white/[0.2] dark:bg-black",
+					"fixed inset-x-2 top-2 z-40 mx-auto flex max-w-screen-2xl items-center gap-6 rounded-xl border border-transparent bg-white px-8 py-4 shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] dark:border-white/[0.2] dark:bg-black",
 					className,
 				)}
 			>
@@ -79,7 +83,7 @@ export const FloatingNav = ({
 					<div className="hidden sm:block">
 						<ModeToggle theme={theme} text={false} />
 					</div>
-					<ResumeLink />
+					{!isAgency && <ResumeLink />}
 				</div>
 			</motion.div>
 		</AnimatePresence>

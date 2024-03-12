@@ -35,7 +35,6 @@ export const StickyScroll = ({
 			return acc;
 		}, 0);
 
-		console.log(cardsBreakpoints, closestBreakpointIndex, latest);
 		setActiveCard(closestBreakpointIndex);
 	});
 

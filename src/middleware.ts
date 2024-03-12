@@ -1,49 +1,55 @@
-import { addMonths } from "date-fns";
-import { NextRequest, NextResponse, userAgent } from "next/server";
+import { addMinutes } from "date-fns";
+import { errors, jwtVerify } from "jose";
+import { NextRequest, NextResponse } from "next/server";
 
 export async function middleware(request: NextRequest) {
 	let response = NextResponse.next();
 
-	if (
-		process.env.NODE_ENV === "production" &&
-		request.method === "GET" &&
-		(request.nextUrl.pathname === "/" || request.nextUrl.pathname === "/contact")
-	) {
-		const { geo, ip, referrer } = request;
-		const { device, browser, isBot, os } = userAgent(request);
+	// Auth
+	const session = request.cookies.get("session");
+	const refresh = request.cookies.get("refresh");
 
-		const data = { geo, device, browser, isBot, os, ip, referrer };
+	if (!refresh) {
+		return response;
+	}
 
-		const visitCookie = request.cookies.get("visit");
+	let updateSession = false;
 
-		let visitId = visitCookie?.value;
-		if (!visitId) {
-			const visit = await fetch(process.env.NEXT_PUBLIC_SITE_URL + "/api/visits", {
-				method: "POST",
-				body: JSON.stringify(data),
-			});
-
-			if (visit.status === 201) {
-				visitId = await visit.text();
-
-				if (visitId) {
-					response.cookies.set("visit", visitId, {
-						httpOnly: true,
-						secure: true,
-						sameSite: true,
-						path: "/",
-						maxAge: addMonths(new Date(), 13).getTime(),
-					});
-				}
-			}
+	try {
+		if (session) {
+			await jwtVerify(session.value, new TextEncoder().encode(process.env.JWT_TOKEN_SECRET));
 		} else {
-			response.cookies.set("visit", visitId, {
-				httpOnly: true,
-				secure: true,
-				sameSite: true,
-				path: "/",
-				maxAge: addMonths(new Date(), 13).getTime(),
-			});
+			updateSession = true;
+		}
+	} catch (err) {
+		if (err instanceof errors.JWTExpired) {
+			updateSession = true;
+		}
+	}
+
+	if (updateSession && refresh.value) {
+		response = NextResponse.redirect(request.nextUrl);
+		// Try to refresh token
+		const newToken = await fetch(
+			process.env.NEXT_PUBLIC_SITE_URL + "/api/auth/refresh?token=" + refresh.value,
+			{
+				method: "GET",
+			},
+		);
+
+		if (newToken.status === 200) {
+			const session = await newToken.text();
+
+			if (session) {
+				response.cookies.set("session", session, {
+					httpOnly: true,
+					secure: true,
+					sameSite: true,
+					path: "/",
+					expires: addMinutes(new Date(), 15),
+					priority: "high",
+				});
+			}
 		}
 	}
 
@@ -52,7 +58,7 @@ export async function middleware(request: NextRequest) {
 
 export const config = {
 	matcher: {
-		source: "/((?!api|_next/static|_next/image|favicon.ico|logo.png|resume.pdf|logo.svg).*)",
+		source: "/agency/:path*",
 		missing: [
 			{ type: "header", key: "next-router-prefetch" },
 			{ type: "header", key: "purpose", value: "prefetch" },

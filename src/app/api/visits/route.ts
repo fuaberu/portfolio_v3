@@ -1,48 +1,20 @@
 import { db } from "@/lib/db";
-import { NextRequest, NextResponse } from "next/server";
-import { z } from "zod";
+import { addMonths } from "date-fns";
+import { NextRequest, NextResponse, userAgent } from "next/server";
 
-const VisitSchema = z.object({
-	geo: z
-		.object({
-			city: z.string().optional(),
-			country: z.string().optional(),
-			region: z.string().optional(),
-			latitude: z.string().optional(),
-			longitude: z.string().optional(),
-		})
+export async function GET(request: NextRequest) {
+	const visitCookie = request.cookies.get("visit");
 
-		.optional(),
-	device: z
-		.object({
-			model: z.string().optional(),
-			type: z.string().optional(),
-			vendor: z.string().optional(),
-		})
-
-		.optional(),
-	browser: z.object({ name: z.string().optional(), version: z.string().optional() }),
-	isBot: z.boolean(),
-	os: z.object({ name: z.string().optional(), version: z.string().optional() }),
-	ip: z.string().optional(),
-	referrer: z.string().optional(),
-});
-
-export async function POST(request: NextRequest) {
-	const body = await request.json();
-
-	console.log(body);
-
-	const validatedFields = VisitSchema.safeParse(body);
-
-	if (!validatedFields.success) {
-		console.log(validatedFields.error);
-		return new NextResponse(JSON.stringify(null), {
-			status: 400,
+	if (visitCookie) {
+		return new NextResponse(JSON.stringify({ success: true }), {
+			status: 200,
 		});
 	}
 
-	const { geo, device, browser, isBot, os, ip, referrer } = validatedFields.data;
+	const { geo, ip, referrer } = request;
+	const { device, browser, isBot, os } = userAgent(request);
+
+	console.log({ geo, ip, referrer, device, browser, isBot, os });
 
 	try {
 		const newVisit = await db.visit.create({
@@ -66,9 +38,20 @@ export async function POST(request: NextRequest) {
 			},
 		});
 
-		return new NextResponse(newVisit.id, {
-			status: 201,
+		// Set json response first
+		const response = NextResponse.json({ success: true }, { status: 201 });
+
+		// Then set a cookie
+		response.cookies.set("visit", newVisit.id, {
+			httpOnly: true,
+			secure: true,
+			sameSite: true,
+			path: "/",
+			maxAge: addMonths(new Date(), 13).getTime(),
+			priority: "high",
 		});
+
+		return response;
 	} catch (error) {
 		return new NextResponse(JSON.stringify(null), {
 			status: 500,

@@ -8,6 +8,7 @@ import { NotificationMeEmail } from "@/emails/NotificationMeEmail";
 
 interface RegisterActionProps {
 	action:
+		| "error"
 		| "first-visit"
 		| "download-resume"
 		| "open-demo"
@@ -25,6 +26,20 @@ export const registerAction = async ({ action, description }: RegisterActionProp
 
 	if (!visit) {
 		return;
+	}
+
+	if (action === "download-resume") {
+		// Notify me
+		await resend.emails.send({
+			from: process.env.EMAIL!,
+			to: process.env.PRIVATE_EMAIL!,
+			subject: action,
+			react: NotificationMeEmail({
+				name: "visit",
+				email: "visit",
+				message: "Some one downloaded my resume, please check it",
+			}),
+		});
 	}
 
 	await db.action.create({

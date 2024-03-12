@@ -75,12 +75,7 @@ export const PasswordPromptDialog = () => {
 							<FormItem>
 								<FormLabel>Password</FormLabel>
 								<FormControl>
-									<Input
-										{...field}
-										placeholder="******"
-										type="password"
-										autoComplete="chrome-off"
-									/>
+									<Input {...field} placeholder="******" type="password" autoComplete="password" />
 								</FormControl>
 								<FormMessage />
 							</FormItem>

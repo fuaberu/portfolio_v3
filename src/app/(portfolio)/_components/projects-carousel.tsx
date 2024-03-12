@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { AnimatePresence, animate, motion, useMotionValue } from "framer-motion";
+import { useEffect, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 interface Props {
@@ -50,7 +50,7 @@ export const ProjectsCarousel = ({ images, active, className }: Props) => {
 		if (active && images.length > 1 && !loading) {
 			interval = setInterval(() => {
 				!hovering && handleNext();
-			}, 3000);
+			}, 2000);
 		}
 
 		return () => clearInterval(interval);
@@ -111,13 +111,3 @@ export const ProjectsCarousel = ({ images, active, className }: Props) => {
 		</div>
 	);
 };
-
-{
-	/* <div className="relative aspect-video w-full max-w-[534px] overflow-hidden">
-<motion.div className="absolute inset-y-0 flex min-w-full">
-	<div className="w-[534px]">1</div>
-	<div className="w-[534px]">2</div>
-	<div className="w-[534px]">3</div>
-</motion.div>
-</div> */
-}

@@ -17,7 +17,7 @@ import {
 } from "@/components/ui/form";
 import { sendMessage } from "@/app/actions";
 import { toast } from "sonner";
-import { BottomGradient } from "../../components/bottom-gradient";
+import { BottomGradient } from "../../../components/bottom-gradient";
 import { motion } from "framer-motion";
 
 const formSchema = z.object({

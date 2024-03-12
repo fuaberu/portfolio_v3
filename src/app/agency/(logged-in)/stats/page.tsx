@@ -1,18 +1,16 @@
 import { db } from "@/lib/db";
 import { StatsTable } from "./_components/stats-table";
-import { addHours } from "date-fns";
 import { LineStats } from "@/components/ui/line-stats";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { cookies } from "next/headers";
-import { PasswordPromptDialog } from "@/components/password-prompt";
-import { Visit } from "@prisma/client";
+import { Role, Visit } from "@prisma/client";
+import { redirect } from "next/navigation";
+import { auth } from "@/lib/auth";
 
 const page = async () => {
-	const loginCookies = cookies().get(process.env.STATS_PASSWORD_COOKIE_NAME!);
-	const isLoggedIn = loginCookies?.value === process.env.STATS_PASSWORD_COOKIE_VALUE!;
+	const user = await auth();
 
-	if (!isLoggedIn) {
-		return <PasswordPromptDialog />;
+	if (user.role !== Role.SUPERADMIN) {
+		redirect("/agency/auth/sign-in");
 	}
 
 	const visits = await db.visit.findMany({

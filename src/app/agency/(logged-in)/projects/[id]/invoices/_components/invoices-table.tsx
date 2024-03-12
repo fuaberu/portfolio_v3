@@ -24,17 +24,11 @@ import {
 } from "@/components/ui/table";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Action, Message, Visit } from "@prisma/client";
 import { format } from "date-fns";
 import { ArrowUpDown } from "lucide-react";
+import Stripe from "stripe";
 
-export type IVisit = Pick<Visit, "id" | "city" | "country" | "createdAt"> & {
-	lastAccess: Date | null;
-	actions: Pick<Action, "id" | "action" | "createdAt">[];
-	messages: Pick<Message, "id">[];
-};
-
-export const columns: ColumnDef<IVisit>[] = [
+export const columns: ColumnDef<Stripe.Invoice>[] = [
 	{
 		accessorKey: "id",
 		header: "Id",
@@ -114,7 +108,7 @@ export const columns: ColumnDef<IVisit>[] = [
 	},
 ];
 
-export function StatsTable({ data }: { data: IVisit[] }) {
+export function InvoicesTable({ data }: { data: Stripe.Invoice[] }) {
 	const [sorting, setSorting] = useState<SortingState>([]);
 	const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
 	const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});

@@ -6,7 +6,7 @@ import { motion, useMotionValueEvent, useScroll } from "framer-motion";
 import { ExternalLink, Github } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import { registerAction } from "../actions";
+import { registerAction } from "../../actions";
 import { ProjectsCarousel } from "./projects-carousel";
 
 const projectsData = [
@@ -178,38 +178,6 @@ export const Projects = () => {
 									: "lg:origin-top-right",
 							)}
 						/>
-
-						{/* <motion.div
-							animate={{
-								background:
-									activeProject === index
-										? linearGradients[index]
-										: "linear-gradient(to bottom right, var(--gray-500), var(--gray-800))",
-								scale: activeProject === index ? (windowInnerWidth > 1250 ? 1.2 : 1) : 1,
-								opacity: activeProject === index ? 1 : 0.2,
-								filter: activeProject === index ? "grayscale(0)" : "grayscale(1)",
-							}}
-							transition={{ duration: 0.3, ease: "easeInOut" }}
-							className={cn(
-								"my-4 aspect-video w-full max-w-[534px] origin-center rounded-md bg-white shadow",
-								index === projectsData.length - 1
-									? "lg:origin-bottom-right"
-									: "lg:origin-top-right",
-							)}
-						>
-							<div className="relative h-full w-full">
-								<div className="absolute inset-1 min-h-0 rounded-md bg-black">
-									<Image
-										src={item.images[0]}
-										alt={item.title}
-										fill
-										sizes="(max-width: 1024px) 100%, 534px"
-										className="w-full rounded-md object-cover object-center"
-										priority
-									/>
-								</div>
-							</div>
-						</motion.div> */}
 					</div>
 				))}
 			</motion.div>
