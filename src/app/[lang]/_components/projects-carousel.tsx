@@ -17,44 +17,42 @@ export const ProjectsCarousel = ({ images, active, className }: Props) => {
 
 	const [hovering, setHovering] = useState(false);
 
-	const handleNext = () => {
-		setCurrentIndex((prevIndex) => (prevIndex + 1 === images.length ? 0 : prevIndex + 1));
-	};
-
 	useEffect(() => {
-		loadImages();
-	}, []);
-
-	const loadImages = () => {
-		setLoading(true);
-		const loadPromises = images.map((image) => {
-			return new Promise((resolve, reject) => {
-				const img = new Image();
-				img.src = image;
-				img.onload = () => resolve(image);
-				img.onerror = reject;
+		const loadImages = () => {
+			setLoading(true);
+			const loadPromises = images.map((image) => {
+				return new Promise((resolve, reject) => {
+					const img = new Image();
+					img.src = image;
+					img.onload = () => resolve(image);
+					img.onerror = reject;
+				});
 			});
-		});
 
-		Promise.all(loadPromises)
-			.then((loadedImages) => {
-				setLoadedImages(loadedImages as string[]);
-			})
-			.catch((error) => console.error("Failed to load images", error))
-			.finally(() => setLoading(false));
-	};
+			Promise.all(loadPromises)
+				.then((loadedImages) => {
+					setLoadedImages(loadedImages as string[]);
+				})
+				.catch((error) => console.error("Failed to load images", error))
+				.finally(() => setLoading(false));
+		};
+
+		loadImages();
+	}, [images]);
 
 	useEffect(() => {
 		// active
 		let interval: any;
 		if (active && images.length > 1 && !loading) {
 			interval = setInterval(() => {
-				!hovering && handleNext();
+				if (!hovering) {
+					setCurrentIndex((prevIndex) => (prevIndex + 1 === images.length ? 0 : prevIndex + 1));
+				}
 			}, 2000);
 		}
 
 		return () => clearInterval(interval);
-	}, [active, hovering, images]);
+	}, [active, hovering, images, loading]);
 
 	const slideVariants = {
 		initial: {

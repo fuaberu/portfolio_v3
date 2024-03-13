@@ -84,7 +84,7 @@ export const TypewriterEffectSmooth = ({
 		};
 
 		runRecursiveAnimation();
-	}, [isInView, scope, animate, initialWidth]);
+	}, [isInView, scope, animate, initialWidth, onComplete]);
 
 	// split text inside of words into array of characters
 	const wordsArray = words.map((word) => {

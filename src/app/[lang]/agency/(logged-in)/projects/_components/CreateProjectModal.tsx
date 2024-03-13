@@ -24,7 +24,7 @@ export function CreateProjectModal({ users }: Props) {
 				<SheetHeader>
 					<SheetTitle>Create Project</SheetTitle>
 					<SheetDescription>
-						Make changes to your profile here. Click save when you're done.
+						Make changes to your profile here. Click save when you&apos;re done.
 					</SheetDescription>
 				</SheetHeader>
 				<ProjectUpsertForm users={users} />
