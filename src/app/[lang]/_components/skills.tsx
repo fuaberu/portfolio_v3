@@ -5,10 +5,16 @@ import Image from "next/image";
 import { HoverEffect } from "@/components/ui/card-hover-effect";
 import { SectionTitle } from "@/components/ui/section-title";
 
-export const Skills = () => {
+interface Props {
+	translations: {
+		title: string;
+	};
+}
+
+export const Skills = ({ translations }: Props) => {
 	return (
 		<section className="min-h-screen space-y-10 pt-6 lg:px-40 xl:px-56">
-			<SectionTitle title="Skills" />
+			<SectionTitle title={translations.title} />
 			<HoverEffect
 				items={mySkills}
 				className="grid grid-cols-[repeat(auto-fill,minmax(150px,1fr))] md:grid-cols-[repeat(auto-fill,minmax(230px,1fr))]"

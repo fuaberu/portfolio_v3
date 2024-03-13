@@ -4,16 +4,12 @@ import React, { useState } from "react";
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from "framer-motion";
 import { cn } from "@/utils/cn";
 import { AppLink } from "./link";
-import { ModeToggle } from "./mode-toggle";
+import { ModeToggle } from "../mode-toggle";
 import { Theme } from "@/types";
-import { ResumeLink } from "./resume-link";
+import { ResumeLink } from "../resume-link";
+import LanguageSwitcher from "../language-switcher";
 
-export const FloatingNav = ({
-	navItems,
-	className,
-	theme,
-	isAgency,
-}: {
+interface Props {
 	navItems: {
 		name: string;
 		link: string;
@@ -22,7 +18,12 @@ export const FloatingNav = ({
 	theme: Theme;
 	className?: string;
 	isAgency?: boolean;
-}) => {
+	translations: {
+		resume: string;
+	};
+}
+
+export const FloatingNav = ({ navItems, className, theme, isAgency, translations }: Props) => {
 	const { scrollYProgress } = useScroll();
 
 	const [visible, setVisible] = useState(true);
@@ -80,10 +81,11 @@ export const FloatingNav = ({
 					</AppLink>
 				))}
 				<div className="ml-auto flex items-center gap-3">
+					<LanguageSwitcher />
 					<div className="hidden sm:block">
 						<ModeToggle theme={theme} text={false} />
 					</div>
-					{!isAgency && <ResumeLink />}
+					{!isAgency && <ResumeLink translations={translations} />}
 				</div>
 			</motion.div>
 		</AnimatePresence>

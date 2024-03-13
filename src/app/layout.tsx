@@ -3,8 +3,10 @@ import type { Metadata, Viewport } from "next";
 import { Inter as FontSans } from "next/font/google";
 import { cn } from "@/utils/cn";
 import { Toaster } from "@/components/ui/sonner";
-import { cookies } from "next/headers";
+import { cookies, headers } from "next/headers";
 import { Theme } from "@/types";
+import { Locale, defaultLocale } from "@/lib/I18n";
+import LocaleProvider from "@/lib/I18n/provider";
 
 const fontSans = FontSans({
 	subsets: ["latin"],
@@ -47,17 +49,23 @@ export default function RootLayout({
 			: Theme.light
 		: Theme.dark;
 
+	const headersList = headers();
+
+	const lang: Locale = (headersList.get("x-locale") as Locale) || defaultLocale;
+
 	return (
-		<html lang="en" className={cn("relative", theme)}>
-			<body
-				className={cn(
-					fontSans.variable,
-					"flex min-h-screen flex-col bg-background font-sans text-foreground antialiased",
-				)}
-			>
-				{children}
-				<Toaster />
-			</body>
-		</html>
+		<LocaleProvider value={lang}>
+			<html lang={lang} className={cn("relative", theme)}>
+				<body
+					className={cn(
+						fontSans.variable,
+						"flex min-h-screen flex-col bg-background font-sans text-foreground antialiased",
+					)}
+				>
+					{children}
+					<Toaster />
+				</body>
+			</html>
+		</LocaleProvider>
 	);
 }

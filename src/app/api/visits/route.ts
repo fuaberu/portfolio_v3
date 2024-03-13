@@ -14,8 +14,6 @@ export async function GET(request: NextRequest) {
 	const { geo, ip, referrer } = request;
 	const { device, browser, isBot, os } = userAgent(request);
 
-	console.log({ geo, ip, referrer, device, browser, isBot, os });
-
 	try {
 		const newVisit = await db.visit.create({
 			data: {

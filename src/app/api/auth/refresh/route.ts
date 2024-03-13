@@ -17,7 +17,7 @@ export async function GET(request: NextRequest) {
 	const token = request.nextUrl.searchParams.get("token");
 
 	const validatedFields = RefreshSchema.safeParse(token);
-	console.log(token);
+
 	if (!validatedFields.success) {
 		return new NextResponse(JSON.stringify(null), {
 			status: 400,
@@ -37,7 +37,7 @@ export async function GET(request: NextRequest) {
 				where: { id: refreshData.payload.id },
 				select: { id: true, name: true, email: true, role: true, active: true },
 			});
-			console.log(user);
+
 			if (user && user.active) {
 				// Create new session object
 				const tokenData = {

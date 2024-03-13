@@ -65,7 +65,7 @@ export const createProject = async ({
 			});
 		}
 	} catch (error) {
-		console.log(error);
+		console.error(error);
 	}
 
 	if (res) {

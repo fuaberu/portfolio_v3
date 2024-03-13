@@ -9,29 +9,19 @@ import { useEffect, useRef, useState } from "react";
 import { registerAction } from "../../actions";
 import { ProjectsCarousel } from "./projects-carousel";
 
-const projectsData = [
-	{
-		title: "Fabel",
-		description:
-			"A personalized task management app designed to enhance your organizational efficiency. With the power of the Kanban methodology, it effortlessly breaks down substantial projects into manageable tasks while providing tracking capabilities. The integration of an intuitive calendar further aids in visualizing tasks and maintaining a comprehensive record of your progress.",
-		stack: ["React.js", "Next.js", "TailwindCSS", "Typescript", "PostgreSQL"],
-		images: ["/fabel_landing.png", "/fabel_kanban.png", "/fabel_calendar.png"],
-		links: { gitHub: "https://github.com/fuaberu/Fabel", demo: "https://fabel-ruby.vercel.app/" },
-	},
-	{
-		title: "Water Tracker",
-		description:
-			"A personal app to track your daily water awmount intake. It allows you to enter the amount of water consumed and the day it was consumed. The app also provides an interactive chart that displays your water intake over time.",
-		stack: ["React.js", "Firebase", "TailwindCSS", "Typescript"],
-		images: ["/water_reminder_home.png"],
-		links: {
-			gitHub: "https://github.com/fuaberu/water-daily-intake",
-			demo: "https://water-reminder-web.web.app/",
-		},
-	},
-];
+interface Props {
+	translations: {
+		title: string;
+		fabel: {
+			description: string;
+		};
+		water_tracker: {
+			description: string;
+		};
+	};
+}
 
-export const Projects = () => {
+export const Projects = ({ translations }: Props) => {
 	const [activeProject, setActiveProject] = useState(0);
 	const ref = useRef<HTMLDivElement>(null);
 	const { scrollYProgress } = useScroll({
@@ -41,16 +31,25 @@ export const Projects = () => {
 		offset: ["start start", "end center"],
 	});
 
-	const [windowInnerWidth, setWindowInnerWidth] = useState(0);
-
-	useEffect(() => {
-		setWindowInnerWidth(window.innerWidth);
-
-		window.addEventListener("resize", () => setWindowInnerWidth(window.innerWidth));
-
-		return (): void =>
-			window.removeEventListener("resize", () => setWindowInnerWidth(window.innerWidth));
-	}, []);
+	const projectsData = [
+		{
+			title: "Fabel",
+			description: translations.fabel.description,
+			stack: ["React.js", "Next.js", "TailwindCSS", "Typescript", "PostgreSQL"],
+			images: ["/fabel_landing.png", "/fabel_kanban.png", "/fabel_calendar.png"],
+			links: { gitHub: "https://github.com/fuaberu/Fabel", demo: "https://fabel-ruby.vercel.app/" },
+		},
+		{
+			title: "Water Tracker",
+			description: translations.water_tracker.description,
+			stack: ["React.js", "Firebase", "TailwindCSS", "Typescript"],
+			images: ["/water_reminder_home.png"],
+			links: {
+				gitHub: "https://github.com/fuaberu/water-daily-intake",
+				demo: "https://water-reminder-web.web.app/",
+			},
+		},
+	];
 
 	const cardLength = projectsData.length;
 
@@ -69,7 +68,7 @@ export const Projects = () => {
 
 	return (
 		<section className="relative min-h-screen space-y-10 py-6 2xl:mx-36">
-			<SectionTitle title="Projects" />
+			<SectionTitle title={translations.title} />
 			<motion.div
 				className="relative flex flex-col rounded-md bg-slate-200 px-4 dark:bg-slate-900 lg:px-10"
 				ref={ref}

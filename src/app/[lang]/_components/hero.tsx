@@ -1,5 +1,7 @@
 import { BottomGradient } from "@/components/bottom-gradient";
 import { MultipleSentencesTypewriterEffect } from "@/components/ui/typewriter-effect";
+import { Locale } from "@/lib/I18n";
+import { cn } from "@/lib/utils";
 import Link from "next/link";
 
 const sentencePortuguese = [
@@ -33,16 +35,28 @@ const setenceJapanese = [
 ];
 const sentences = [setenceJapanese, setenceEnglish, sentencePortuguese];
 
-export const Hero = () => {
+interface Props {
+	translations: {
+		hello: string;
+		into: string;
+		title: string;
+		contact: string;
+	};
+	locale: Locale;
+}
+
+export const Hero = ({ translations, locale }: Props) => {
 	return (
 		<section className="relative min-h-screen animate-move-up pt-[25vh]">
 			<div className="space-y-8 px-0 md:space-y-12 lg:space-y-16 lg:px-12 xl:px-28">
 				<div className="font-bold">
 					<span className="text-3xl text-gray-700 dark:text-gray-400 md:text-5xl">
-						Hello, nice to meet you 👋
+						{translations.hello} 👋
 					</span>
-					<h1 className="text-5xl sm:text-7xl md:text-8xl">{"I'm Kevin Fabel"}</h1>
-					<p className="text-xl md:text-3xl">Software developer</p>
+					<h1 className={cn("text-5xl sm:text-7xl md:text-8xl", locale === "jp" && "lg:text-6xl")}>
+						{translations.into}
+					</h1>
+					<p className="text-xl md:text-3xl">{translations.title}</p>
 				</div>
 				<MultipleSentencesTypewriterEffect
 					sentences={sentences}
@@ -56,7 +70,7 @@ export const Hero = () => {
 				>
 					<span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#393BB2_50%,#E2CBFF_100%)]" />
 					<span className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-full bg-background px-4 py-2 backdrop-blur-3xl">
-						Contact Me
+						{translations.contact}
 					</span>
 				</Link>
 				<BottomGradient />

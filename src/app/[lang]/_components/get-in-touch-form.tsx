@@ -3,7 +3,7 @@
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/utils/cn";
-import { Linkedin, Mail } from "lucide-react";
+import { ArrowBigRight, ArrowBigRightDash, Linkedin, Mail } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -26,7 +26,25 @@ const formSchema = z.object({
 	message: z.string().min(5).max(500),
 });
 
-export const GetInTouchForm = () => {
+interface Props {
+	translations: {
+		title: string;
+		h2: string;
+		p: string;
+		name: string;
+		name_placeholder: string;
+		email: string;
+		email_placeholder: string;
+		message: string;
+		message_placeholder: string;
+		submit: string;
+		success: string;
+		error: string;
+		loading: string;
+	};
+}
+
+export const GetInTouchForm = ({ translations }: Props) => {
 	const form = useForm<z.infer<typeof formSchema>>({
 		resolver: zodResolver(formSchema),
 		defaultValues: {
@@ -36,20 +54,20 @@ export const GetInTouchForm = () => {
 		},
 	});
 	async function onSubmit(values: z.infer<typeof formSchema>) {
-		const id = toast.loading("loading...");
+		const id = toast.loading(translations.loading);
 
 		try {
 			const data = await sendMessage(values);
 
 			if (data.success) {
-				toast.success("Message sent, I will get back to you as soon as I can", { id });
+				toast.success(translations.success, { id });
 
 				form.reset();
 			} else {
 				toast.dismiss(id);
 			}
 		} catch (error) {
-			toast.error("Something went wrong. Please try again later", { id });
+			toast.error(translations.error, { id });
 		}
 	}
 
@@ -61,9 +79,11 @@ export const GetInTouchForm = () => {
 			viewport={{ once: true }}
 			className="mx-auto w-full max-w-md rounded-2xl bg-white p-4 shadow-input dark:bg-black md:p-8"
 		>
-			<h2 className="text-xl font-bold text-neutral-800 dark:text-neutral-200">Get in touch</h2>
+			<h2 className="text-xl font-bold text-neutral-800 dark:text-neutral-200">
+				{translations.h2}
+			</h2>
 			<p className="mt-2 max-w-sm text-sm text-neutral-600 dark:text-neutral-300">
-				Send me a message and I will get back to you as soon as I can.
+				{translations.p}
 			</p>
 
 			<Form {...form}>
@@ -74,9 +94,13 @@ export const GetInTouchForm = () => {
 						render={({ field }) => (
 							<FormItem>
 								<LabelInputContainer className="mb-4">
-									<FormLabel>Name</FormLabel>
+									<FormLabel>{translations.name}</FormLabel>
 									<FormControl>
-										<Input {...field} placeholder="Jhon Doe" autoComplete="name" />
+										<Input
+											{...field}
+											placeholder={translations.name_placeholder}
+											autoComplete="name"
+										/>
 									</FormControl>
 									<FormMessage />
 								</LabelInputContainer>
@@ -89,9 +113,13 @@ export const GetInTouchForm = () => {
 						render={({ field }) => (
 							<FormItem>
 								<LabelInputContainer className="mb-4">
-									<FormLabel>Email</FormLabel>
+									<FormLabel>{translations.email}</FormLabel>
 									<FormControl>
-										<Input {...field} placeholder="jhondoem@fc.com" autoComplete="email" />
+										<Input
+											{...field}
+											placeholder={translations.email_placeholder}
+											autoComplete="email"
+										/>
 									</FormControl>
 									<FormMessage />
 								</LabelInputContainer>
@@ -104,9 +132,9 @@ export const GetInTouchForm = () => {
 						render={({ field }) => (
 							<FormItem>
 								<LabelInputContainer className="mb-8">
-									<FormLabel>Your message</FormLabel>
+									<FormLabel>{translations.message}</FormLabel>
 									<FormControl>
-										<Textarea {...field} placeholder="Hi there! 👋" rows={4} />
+										<Textarea {...field} placeholder={translations.message_placeholder} rows={4} />
 									</FormControl>
 									<FormMessage />
 								</LabelInputContainer>
@@ -115,10 +143,10 @@ export const GetInTouchForm = () => {
 					/>
 
 					<button
-						className="group/btn relative block h-10 w-full rounded-md border bg-gradient-to-br from-gray-50 to-gray-100 font-medium text-teal-300 shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:border-none dark:bg-zinc-800 dark:from-zinc-900 dark:to-zinc-900 dark:shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset]"
+						className="group/btn relative flex h-10 w-full items-center justify-center gap-2 rounded-md border bg-gradient-to-br from-gray-50 to-gray-100 font-medium text-teal-300 shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:border-none dark:bg-zinc-800 dark:from-zinc-900 dark:to-zinc-900 dark:shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset]"
 						type="submit"
 					>
-						Send message &rarr;
+						{translations.submit} <ArrowBigRight />
 						<BottomGradient />
 					</button>
 
@@ -130,7 +158,9 @@ export const GetInTouchForm = () => {
 							href="mailto:kevinfabe@gmail.com"
 						>
 							<Mail className="h-4 w-4 text-neutral-800 dark:text-neutral-300" />
-							<span className="text-sm text-neutral-700 dark:text-neutral-300">Mail</span>
+							<span className="text-sm text-neutral-700 dark:text-neutral-300">
+								{translations.email}
+							</span>
 							<BottomGradient />
 						</a>
 						<a

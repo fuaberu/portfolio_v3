@@ -1,0 +1,51 @@
+{
+	"portfolio": {
+		"metadata": {
+			"template": "%s | Portfolio",
+			"default": "Portfolio"
+		},
+		"hero": {
+			"hello": "Hello, nice to meet you",
+			"into": "I'm Kevin Fabel",
+			"title": "Software developer",
+			"contact": "Contact Me"
+		},
+		"skills": {
+			"title": "Skills"
+		},
+		"projects": {
+			"title": "Projects",
+			"fabel": {
+				"description": "A personalized task management app designed to enhance your organizational efficiency. With the power of the Kanban methodology, it effortlessly breaks down substantial projects into manageable tasks while providing tracking capabilities. The integration of an intuitive calendar further aids in visualizing tasks and maintaining a comprehensive record of your progress."
+			},
+			"water_tracker": {
+				"description": "A personal app to track your daily water awmount intake. It allows you to enter the amount of water consumed and the day it was consumed. The app also provides an interactive chart that displays your water intake over time."
+			}
+		},
+		"contact": {
+			"title": "Contact",
+			"h2": "Get in touch",
+			"p": "Send me a message and I will get back to you as soon as I can.",
+			"name": "name",
+			"name_placeholder": "Name",
+			"email": "Email",
+			"email_placeholder": "Email",
+			"message": "message",
+			"message_placeholder": "Hi there! 👋",
+			"submit": "Send message",
+			"success": "Message sent, I will get back to you as soon as I can",
+			"error": "Something went wrong. Please try again later",
+			"loading": "Sending..."
+		}
+	},
+	"contact": {
+		"metadata": {
+			"title": "Contact"
+		}
+	},
+	"links": {
+		"home": "Home",
+		"contact": "Contact",
+		"resume": "Resume"
+	}
+}

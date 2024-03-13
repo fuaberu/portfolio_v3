@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from "@/lib/I18n/link";
 import React from "react";
 import { BottomGradient } from "../bottom-gradient";
 import { cn } from "@/utils/cn";

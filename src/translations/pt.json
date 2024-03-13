@@ -1,0 +1,51 @@
+{
+	"portfolio": {
+		"metadata": {
+			"template": "%s | Portfólio",
+			"default": "Portfólio"
+		},
+		"hero": {
+			"hello": "Olá, tudo bem?",
+			"into": "Eu sou Kevin Fabel",
+			"title": "Desenvolvedor de software",
+			"contact": "Entre em contato"
+		},
+		"skills": {
+			"title": "Habilidades"
+		},
+		"projects": {
+			"title": "Projetos",
+			"fabel": {
+				"description": "Um aplicativo personalizado de gestão de tarefas projetado para aprimorar a eficiência organizacional. Com o poder da metodologia Kanban, ele quebra com facilidade projetos substanciais em tarefas gerenciáveis, ao mesmo tempo em que oferece capacidades de rastreamento. A integração de um calendário intuitivo também ajuda na visualização das tarefas e na manutenção de um registro abrangente do seu progresso."
+			},
+			"water_tracker": {
+				"description": "Um aplicativo pessoal para acompanhar sua ingestão diária de água. Ele permite que você insira a quantidade de água consumida e o dia em que foi consumida. O aplicativo também fornece um gráfico interativo que exibe sua ingestão de água ao longo do tempo."
+			}
+		},
+		"contact": {
+			"title": "Contato",
+			"h2": "Entre em contato",
+			"p": "Envie-me uma mensagem e entrarei em contato com você assim que possível.",
+			"name": "Nome",
+			"name_placeholder": "João da silva",
+			"email": "Email",
+			"email_placeholder": "joao@email.com",
+			"message": "Mensagem",
+			"message_placeholder": "Olá eu sou o joão, vamos colaborar em um projeto 👋",
+			"submit": "Enviar mensagem",
+			"success": "Mensagem enviada, entrarei em contato assim que possível",
+			"error": "Algo deu errado. Por favor, tente novamente mais tarde",
+			"loading": "Enviando..."
+		}
+	},
+	"contact":{
+		"metadata": {
+			"title": "Contato"
+		}
+	},
+	"links" :{
+		"home": "Inicial",
+		"contact": "Contato",
+		"resume": "Curriculo"
+	}
+}
