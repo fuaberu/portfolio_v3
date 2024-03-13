@@ -53,7 +53,7 @@ export const Hero = ({ translations, locale }: Props) => {
 					<span className="text-3xl text-gray-700 dark:text-gray-400 md:text-5xl">
 						{translations.hello} 👋
 					</span>
-					<h1 className={cn("text-5xl sm:text-7xl md:text-8xl", locale === "jp" && "lg:text-6xl")}>
+					<h1 className={cn("text-5xl sm:text-7xl md:text-8xl")}>
 						{translations.into}
 					</h1>
 					<p className="text-xl md:text-3xl">{translations.title}</p>
