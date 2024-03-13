@@ -1,8 +1,8 @@
 {
 	"portfolio": {
 		"metadata": {
-			"template": "%s | ポートフォリオ",
-			"default": "ポートフォリオ"
+			"template": "%s | Portfolio",
+			"default": "Portfolio"
 		},
 		"hero": {
 			"hello": "初めまして 👋",
@@ -44,7 +44,7 @@
 		}
 	},
 	"links" :{
-		"home": "potfolio",
+		"home": "Portfolio",
 		"contact": "Contact",
 		"resume": "履歴書"
 	}
