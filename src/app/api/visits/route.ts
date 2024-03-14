@@ -1,8 +1,7 @@
 import { db } from "@/lib/db";
-import { addMonths } from "date-fns";
-import { NextRequest, NextResponse, userAgent } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
-export async function GET(request: NextRequest) {
+export async function POST(request: NextRequest) {
 	const visitCookie = request.cookies.get("visit");
 
 	if (visitCookie) {
@@ -11,8 +10,7 @@ export async function GET(request: NextRequest) {
 		});
 	}
 
-	const { geo, ip, referrer } = request;
-	const { device, browser, isBot, os } = userAgent(request);
+	const { geo, ip, referrer, device, browser, isBot, os } = await request.json();
 
 	try {
 		const newVisit = await db.visit.create({
@@ -36,20 +34,7 @@ export async function GET(request: NextRequest) {
 			},
 		});
 
-		// Set json response first
-		const response = NextResponse.json({ success: true }, { status: 201 });
-
-		// Then set a cookie
-		response.cookies.set("visit", newVisit.id, {
-			httpOnly: true,
-			secure: true,
-			sameSite: true,
-			path: "/",
-			maxAge: addMonths(new Date(), 13).getTime(),
-			priority: "high",
-		});
-
-		return response;
+		return new NextResponse(newVisit.id, { status: 201 });
 	} catch (error) {
 		return new NextResponse(JSON.stringify(null), {
 			status: 500,

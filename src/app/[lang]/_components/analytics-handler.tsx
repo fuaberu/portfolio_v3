@@ -16,13 +16,6 @@ export const AnalyticsHandler = () => {
 	}, [pathname, searchParams]);
 
 	useEffect(() => {
-		const initApp = async () => {
-			// Initiate visits cookies
-			await fetch(process.env.NEXT_PUBLIC_SITE_URL + "/api/visits");
-		};
-
-		initApp();
-
 		const handleWindowClose = (_: BeforeUnloadEvent) => {
 			registerAction({
 				action: "close-window",
