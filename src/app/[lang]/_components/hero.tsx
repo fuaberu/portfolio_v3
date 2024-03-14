@@ -51,11 +51,9 @@ export const Hero = ({ translations, locale }: Props) => {
 			<div className="space-y-8 px-0 md:space-y-12 lg:space-y-16 lg:px-12 xl:px-28">
 				<div className="font-bold">
 					<span className="text-3xl text-gray-700 dark:text-gray-400 md:text-5xl">
-						{translations.hello} 👋
+						{translations.hello}
 					</span>
-					<h1 className={cn("text-5xl sm:text-7xl md:text-8xl")}>
-						{translations.into}
-					</h1>
+					<h1 className={cn("text-5xl sm:text-7xl md:text-8xl")}>{translations.into}</h1>
 					<p className="text-xl md:text-3xl">{translations.title}</p>
 				</div>
 				<MultipleSentencesTypewriterEffect
