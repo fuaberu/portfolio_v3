@@ -3,7 +3,7 @@ import { Hero } from "./[lang]/_components/hero";
 import { Skills } from "./[lang]/_components/skills";
 import { Projects } from "./[lang]/_components/projects";
 import { Contact } from "./[lang]/_components/contact";
-import { getDictionary } from "./[lang]/translations";
+import { getDictionary } from "./translations";
 
 export default async function Page() {
 	const translations = await getDictionary("en");

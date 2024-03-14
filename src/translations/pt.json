@@ -43,6 +43,14 @@
 			"title": "Contato"
 		}
 	},
+	"not_found": {
+		"metadata": {
+			"title": "Página não encontrada | Portfolio"
+		},
+		"h2": "Desculpe, a página não pode ser encontrada",
+		"p": "A página que você procurava parece ter sido movida, excluída ou não existe.",
+		"back": "Voltar ao portfólio"
+	},
 	"links" :{
 		"home": "Portfólio",
 		"contact": "Contato",

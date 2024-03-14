@@ -1,9 +1,20 @@
 "use client";
 
-import { Dispatch, FC, SetStateAction, createContext, useContext, useState } from "react";
+import {
+	Dispatch,
+	FC,
+	SetStateAction,
+	createContext,
+	useContext,
+	useEffect,
+	useState,
+} from "react";
 import { Locale, defaultLocale } from ".";
 
-const LocaleContext = createContext<Locale>(defaultLocale);
+const LocaleContext = createContext<{
+	locale: Locale;
+	setLocale: Dispatch<SetStateAction<Locale>>;
+}>({ locale: defaultLocale, setLocale: () => {} });
 
 export const useLocale = () => {
 	const context = useContext(LocaleContext);
@@ -21,7 +32,9 @@ interface ProviderProps {
 }
 
 const LocaleProvider: FC<ProviderProps> = ({ children, value }) => {
-	return <LocaleContext.Provider value={value}>{children}</LocaleContext.Provider>;
+	const [locale, setLocale] = useState<Locale>(value);
+
+	return <LocaleContext.Provider value={{ locale, setLocale }}>{children}</LocaleContext.Provider>;
 };
 
 export default LocaleProvider;

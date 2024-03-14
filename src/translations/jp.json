@@ -43,6 +43,14 @@
 			"title": "Contact"
 		}
 	},
+	"not_found": {
+		"metadata": {
+			"title": "ページが見つかりません | Portfolio"
+		},
+		"h2": "申し訳ありませんが、ページが見つかりません",
+		"p": "お探しのページは移動、削除されたか、存在しないようです。",
+		"back": "ポートフォリオに戻る"
+	},
 	"links" :{
 		"home": "Portfolio",
 		"contact": "Contact",

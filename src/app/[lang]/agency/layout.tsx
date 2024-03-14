@@ -5,7 +5,7 @@ import { Theme } from "@/types";
 import { Home } from "lucide-react";
 import type { Metadata } from "next";
 import { cookies, headers } from "next/headers";
-import { getDictionary } from "../translations";
+import { getDictionary } from "../../translations";
 
 export const metadata: Metadata = {
 	title: {

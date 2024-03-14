@@ -1,7 +1,7 @@
 import { GetInTouchForm } from "@/app/[lang]/_components/get-in-touch-form";
 import { Locale } from "@/lib/I18n";
 import type { Metadata } from "next";
-import { getDictionary } from "../../translations";
+import { getDictionary } from "../../../translations";
 
 type Props = { params: { lang: Locale } };
 

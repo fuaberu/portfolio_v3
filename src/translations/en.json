@@ -43,6 +43,14 @@
 			"title": "Contact"
 		}
 	},
+	"not_found": {
+		"metadata": {
+			"title": "Page not found | Portfolio"
+		},
+		"h2": "Sorry, the page can't be found",
+		"p": "The page you were looking for appears to have been moved, deleted or does not exist.",
+		"back": "Back to the Portfolio"
+	},
 	"links": {
 		"home": "Portfolio",
 		"contact": "Contact",

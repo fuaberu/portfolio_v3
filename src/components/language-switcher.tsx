@@ -9,8 +9,9 @@ import {
 } from "@/components/ui/menubar";
 import { Languages } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import Link from "@/lib/I18n/link";
+import { useLocale } from "@/lib/I18n/provider";
 
 export default function LanguageSwitcher() {
 	const pathname = usePathname();

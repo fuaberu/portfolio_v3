@@ -10,7 +10,7 @@ interface Props extends React.ComponentProps<typeof NextLink> {
 }
 
 const Link = ({ href, className, ...props }: Props) => {
-	let locale = useLocale();
+	let { locale, setLocale } = useLocale();
 
 	if (props.locale) {
 		locale = props.locale;
@@ -24,6 +24,7 @@ const Link = ({ href, className, ...props }: Props) => {
 		<NextLink
 			href={`/${locale}${href}`}
 			className={cn("hover:cursor-pointer", className)}
+			onClick={() => setLocale(locale)}
 			{...props}
 		>
 			{props.children}

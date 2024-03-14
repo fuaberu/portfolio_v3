@@ -6,10 +6,8 @@ import { I18middleware } from "./lib/I18n";
 export async function middleware(request: NextRequest) {
 	let response = NextResponse.next();
 
+	// Auth
 	if (request.nextUrl.pathname.startsWith("/agency")) {
-		// This logic is only applied to /agency
-
-		// Auth
 		const session = request.cookies.get("session");
 		const refresh = request.cookies.get("refresh");
 
@@ -59,8 +57,10 @@ export async function middleware(request: NextRequest) {
 	}
 
 	if (request.method === "GET") {
+		// I18n
 		response = I18middleware(request);
 
+		// Analytics
 		const hasVisit = request.cookies.get("visit");
 
 		if (!hasVisit) {
@@ -115,5 +115,20 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-	matcher: ["/", "/en/:path*", "/pt/:path*", "/jp/:path*", "/agency/:path*"],
+	matcher: [
+		/*
+		 * Match all request paths except for the ones starting with:
+		 * - api (API routes)
+		 * - _next/static (static files)
+		 * - _next/image (image optimization files)
+		 * - favicon.ico (favicon file)
+		 */
+		{
+			source: "/((?!api|_next/static|_next/image|.*\\..*|favicon.ico).*)",
+			missing: [
+				{ type: "header", key: "next-router-prefetch" },
+				{ type: "header", key: "purpose", value: "prefetch" },
+			],
+		},
+	],
 };

@@ -40,7 +40,10 @@ export const I18middleware = (request: NextRequest) => {
 
 		return response;
 	}
+
 	const locale = getLocale(request);
+
+	console.log(locale);
 
 	// Redirect if there is no locale
 	request.nextUrl.pathname = `/${locale}${pathname}`;

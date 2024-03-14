@@ -3,7 +3,7 @@ import { Hero } from "../_components/hero";
 import { Skills } from "../_components/skills";
 import { Projects } from "../_components/projects";
 import { Contact } from "../_components/contact";
-import { getDictionary } from "../translations";
+import { getDictionary } from "../../translations";
 import { Locale } from "@/lib/I18n";
 
 export default async function Page({ params }: { params: { lang: Locale } }) {

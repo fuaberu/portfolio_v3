@@ -1,12 +1,13 @@
+import { Button } from "@/components/ui/button";
 import { FloatingNav } from "@/components/ui/floating-navbar";
-import { AtSign, Home } from "lucide-react";
 import Footer from "@/components/ui/footer";
-import { cookies, headers } from "next/headers";
-import { Theme } from "@/types";
-import { AnalyticsHandler } from "../_components/analytics-handler";
-import type { Metadata } from "next";
-import { getDictionary } from "../../translations";
 import { Locale, defaultLocale } from "@/lib/I18n";
+import { ArrowLeft, AtSign, Home } from "lucide-react";
+import { cookies, headers } from "next/headers";
+import Link from "next/link";
+import { getDictionary } from "./translations";
+import { Theme } from "@/types";
+import type { Metadata } from "next";
 
 export async function generateMetadata(): Promise<Metadata> {
 	const locale: Locale = (headers().get("x-locale") as Locale) || defaultLocale;
@@ -14,18 +15,11 @@ export async function generateMetadata(): Promise<Metadata> {
 	const translations = await getDictionary(locale);
 
 	return {
-		title: {
-			template: translations.portfolio.metadata.template,
-			default: translations.portfolio.metadata.default,
-		},
+		title: translations.not_found.metadata.title,
 	};
 }
 
-export default async function RootLayout({
-	children,
-}: Readonly<{
-	children: React.ReactNode;
-}>) {
+const NotFound = async () => {
 	const themeCookie = cookies().get("theme");
 	// current theme from cookies
 	const theme = themeCookie
@@ -56,9 +50,21 @@ export default async function RootLayout({
 			<header>
 				<FloatingNav navItems={navItems} theme={theme} translations={translations.links} />
 			</header>
-			<main className="relative mx-auto w-full flex-1">{children}</main>
+			<main className="relative mx-auto mt-28 w-full flex-1">
+				<div className="mx-auto w-full max-w-md space-y-6 text-center">
+					<h2 className="text-2xl font-bold">{translations.not_found.h2}</h2>
+					<p className="font-medium">{translations.not_found.p}</p>
+					<Link className="flex items-center justify-center gap-3" href={"/" + locale}>
+						<Button>
+							<ArrowLeft />
+							<span>{translations.not_found.back}</span>
+						</Button>
+					</Link>
+				</div>
+			</main>
 			<Footer navItems={navItems} theme={theme} translations={translations.links} />
-			<AnalyticsHandler />
 		</>
 	);
-}
+};
+
+export default NotFound;
