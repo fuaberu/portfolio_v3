@@ -19,7 +19,7 @@ export default function LanguageSwitcher() {
 		<Menubar className="border-none p-0">
 			<MenubarMenu>
 				<MenubarTrigger asChild className="hover:cursor-pointer">
-					<Button variant="outline">
+					<Button variant="outline" size="icon">
 						<Languages size={20} />
 					</Button>
 				</MenubarTrigger>
