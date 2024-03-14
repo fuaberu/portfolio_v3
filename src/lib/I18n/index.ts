@@ -9,9 +9,17 @@ export const locales: Locale[] = ["en", "pt", "jp"];
 export const defaultLocale = locales[0];
 
 function getLocale(request: NextRequest) {
+	const negotiatorHeaders: Record<string, string> = {};
+
+	request.headers.forEach((value, key) => (negotiatorHeaders[key] = value));
+
 	let languages = new Negotiator({
-		headers: { "accept-language": request.headers.get("accept-language") || "" },
+		headers: negotiatorHeaders,
 	}).languages();
+
+	if (languages.length === 1 && languages[0] === "*") {
+		languages = [defaultLocale];
+	}
 
 	return match(languages, locales, defaultLocale);
 }

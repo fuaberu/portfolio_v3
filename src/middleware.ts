@@ -4,7 +4,6 @@ import { NextRequest, NextResponse } from "next/server";
 import { I18middleware } from "./lib/I18n";
 
 export async function middleware(request: NextRequest) {
-	// Check if there is any supported locale in the pathname
 	let response = I18middleware(request);
 
 	if (request.nextUrl.pathname.startsWith("/agency")) {
