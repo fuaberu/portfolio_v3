@@ -1,34 +1,54 @@
 "use client";
 
-import { Theme } from "@/types";
-import { Moon, Sun } from "lucide-react";
-import { useState } from "react";
+import { Check, MoonIcon, SunIcon, SunMoon } from "lucide-react";
+import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import {
+	DropdownMenu,
+	DropdownMenuContent,
+	DropdownMenuItem,
+	DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { useEffect, useState } from "react";
+import { useTheme } from "next-themes";
 
-export function ModeToggle({ theme, text = true }: { theme: Theme; text?: boolean }) {
-	const [_theme, setTheme] = useState<Theme>(theme);
+export const ThemePicker = () => {
+	const { theme, themes, setTheme } = useTheme();
+	const [mounted, setMounted] = useState(false);
 
-	const toogleTheme = () => {
-		const root = document.getElementsByTagName("html")[0];
+	useEffect(() => {
+		setMounted(true);
+	}, []);
 
-		root.classList.toggle(Theme.dark);
-
-		if (root.classList.contains(Theme.dark)) {
-			setTheme(Theme.dark);
-			document.cookie = `theme=${Theme.dark};path=/;max-age=31536000`;
-		} else {
-			setTheme(Theme.light);
-			document.cookie = `theme=${Theme.light};path=/;max-age=31536000`;
-		}
-	};
+	if (!mounted) {
+		return (
+			<Button variant="ghost" size="icon" className="overflow-hidden">
+				<SunMoon className="h-6 w-6 shrink-0" />
+			</Button>
+		);
+	}
 
 	return (
-		<Button variant="outline" size="icon" onClick={toogleTheme}>
-			<Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-			<Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-			{text && <span className="capitalize">{_theme}</span>}
-
-			<span className="sr-only">Toggle theme</span>
-		</Button>
+		<DropdownMenu>
+			<DropdownMenuTrigger className="overflow-hidden" asChild>
+				<Button variant="ghost" size="icon">
+					{theme === "light" && <SunIcon className="h-6 w-6 shrink-0" />}
+					{theme === "dark" && <MoonIcon className="h-6 w-6 shrink-0" />}
+					{theme === "system" && <SunMoon className="h-6 w-6 shrink-0" />}
+				</Button>
+			</DropdownMenuTrigger>
+			<DropdownMenuContent align="end" className="w-36">
+				{themes.map((th) => (
+					<DropdownMenuItem
+						key={th}
+						onClick={() => setTheme(th)}
+						className="flex items-center capitalize"
+					>
+						<Check className={cn("mr-2 h-4 w-4", theme === th ? "opacity-100" : "opacity-0")} />
+						{th}
+					</DropdownMenuItem>
+				))}
+			</DropdownMenuContent>
+		</DropdownMenu>
 	);
-}
+};

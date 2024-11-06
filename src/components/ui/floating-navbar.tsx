@@ -1,11 +1,10 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { JSX, useState } from "react";
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from "framer-motion";
 import { cn } from "@/utils/cn";
 import { AppLink } from "./link";
-import { ModeToggle } from "../mode-toggle";
-import { Theme } from "@/types";
+import { ThemePicker } from "../mode-toggle";
 import { ResumeLink } from "../resume-link";
 import LanguageSwitcher from "../language-switcher";
 
@@ -15,15 +14,11 @@ interface Props {
 		link: string;
 		icon?: JSX.Element;
 	}[];
-	theme: Theme;
 	className?: string;
 	isAgency?: boolean;
-	translations: {
-		resume: string;
-	};
 }
 
-export const FloatingNav = ({ navItems, className, theme, isAgency, translations }: Props) => {
+export const FloatingNav = ({ navItems, className, isAgency }: Props) => {
 	const { scrollYProgress } = useScroll();
 
 	const [visible, setVisible] = useState(true);
@@ -83,9 +78,9 @@ export const FloatingNav = ({ navItems, className, theme, isAgency, translations
 				<div className="ml-auto flex items-center gap-3">
 					<LanguageSwitcher />
 					<div className="hidden sm:block">
-						<ModeToggle theme={theme} text={false} />
+						<ThemePicker />
 					</div>
-					{!isAgency && <ResumeLink translations={translations} />}
+					{!isAgency && <ResumeLink />}
 				</div>
 			</motion.div>
 		</AnimatePresence>

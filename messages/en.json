@@ -1,0 +1,79 @@
+{
+	"portfolio": {
+		"metadata": {
+			"template": "%s | Portfolio",
+			"default": "Portfolio"
+		},
+		"hero": {
+			"hello": "Hello, nice to meet you 👋",
+			"into": "I'm Kevin Fabel",
+			"title": "Software developer",
+			"contact": "Contact Me"
+		},
+		"skills": {
+			"title": "Skills"
+		},
+		"projects": {
+			"title": "Projects",
+			"fabel": {
+				"description": "A personalized task management app designed to enhance your organizational efficiency. With the power of the Kanban methodology, it effortlessly breaks down substantial projects into manageable tasks while providing tracking capabilities. The integration of an intuitive calendar further aids in visualizing tasks and maintaining a comprehensive record of your progress."
+			},
+			"water_tracker": {
+				"description": "A personal app to track your daily water awmount intake. It allows you to enter the amount of water consumed and the day it was consumed. The app also provides an interactive chart that displays your water intake over time."
+			},
+			"vidsellr": {
+				"description": "Video Marketplace Platform enabling creators to monetize content through automated preview sharing and post-purchase delivery. Architected serverless video processing pipeline using AWS MediaConvert, S3, Lambda, and EventBridge for automated video preview generation with watermarks. Implemented secure content delivery system with preview/full video access control and Stripe payment integration."
+			},
+			"moricard": {
+				"description": "Digital Card Platform with interactive animations built using Next.js, TypeScript, and Tailwind CSS. Implemented secure image handling system using AWS S3 presigned URLs and private bucket storage. Built premium features including custom subdomain creation (*.moricard.com) and Stripe payments management."
+			},
+			"show_more": "Show More",
+			"show_less": "Show Less"
+		},
+		"contact": {
+			"title": "Contact",
+			"h2": "Get in touch",
+			"p": "Send me a message and I will get back to you as soon as I can.",
+			"name": "name",
+			"name_placeholder": "Name",
+			"email": "Email",
+			"email_placeholder": "Email",
+			"message": "message",
+			"message_placeholder": "Hi there! 👋",
+			"submit": "Send message",
+			"success": "Message sent, I will get back to you as soon as I can",
+			"error": "Something went wrong. Please try again later",
+			"loading": "Sending..."
+		},
+		"experience": {
+			"title": "Professional Experience",
+			"logon": {
+				"role": "Full-stack developer",
+				"period": "March 2022 – Present",
+				"achievements": {
+					"payment": "Developed automated payment system integrating 8 banking APIs with webhooks, replacing manual processes and driving significant client acquisition through expanded banking partnerships",
+					"facial": "Built facial recognition access control system for schools, enabling automated student attendance tracking and secure parent-verified pickup process",
+					"api": "Designed REST API gateway for partner integrations with granular data permissions, token-based authentication, and comprehensive security logging"
+				}
+			}
+		}
+	},
+	"contact": {
+		"metadata": {
+			"title": "Contact"
+		}
+	},
+	"not_found": {
+		"metadata": {
+			"title": "Page not found | Portfolio"
+		},
+		"h2": "Sorry, the page can't be found",
+		"p": "The page you were looking for appears to have been moved, deleted or does not exist.",
+		"back": "Back to the Portfolio"
+	},
+	"links": {
+		"home": "Portfolio",
+		"contact": "Contact",
+		"resume": "Resume"
+	}
+}

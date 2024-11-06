@@ -1,0 +1,79 @@
+{
+	"portfolio": {
+		"metadata": {
+			"template": "%s | Portfólio",
+			"default": "Portfólio"
+		},
+		"hero": {
+			"hello": "Olá, tudo bem? 👋",
+			"into": "Eu sou Kevin Fabel",
+			"title": "Desenvolvedor de software",
+			"contact": "Entre em contato"
+		},
+		"skills": {
+			"title": "Habilidades"
+		},
+		"projects": {
+			"title": "Projetos",
+			"fabel": {
+				"description": "Um aplicativo personalizado de gestão de tarefas projetado para aprimorar a eficiência organizacional. Com o poder da metodologia Kanban, ele quebra com facilidade projetos substanciais em tarefas gerenciáveis, ao mesmo tempo em que oferece capacidades de rastreamento. A integração de um calendário intuitivo também ajuda na visualização das tarefas e na manutenção de um registro abrangente do seu progresso."
+			},
+			"water_tracker": {
+				"description": "Um aplicativo pessoal para acompanhar sua ingestão diária de água. Ele permite que você insira a quantidade de água consumida e o dia em que foi consumida. O aplicativo também fornece um gráfico interativo que exibe sua ingestão de água ao longo do tempo."
+			},
+			"vidsellr": {
+				"description": "Plataforma de Marketplace de Vídeos que permite aos criadores monetizar conteúdo através de compartilhamento automatizado de prévia e entrega pós-compra. Arquitetei pipeline serverless de processamento de vídeo usando AWS MediaConvert, S3, Lambda e EventBridge para geração automatizada de prévias com marcas d'água. Implementei sistema seguro de entrega de conteúdo com controle de acesso prévia/vídeo completo e integração de pagamento Stripe."
+			},
+			"moricard": {
+				"description": "Plataforma de Cartões Digitais com animações interativas construída usando Next.js, TypeScript e Tailwind CSS. Implementei sistema seguro de manipulação de imagens usando URLs pré-assinadas do AWS S3 e armazenamento em bucket privado. Desenvolvi recursos premium incluindo criação de subdomínio personalizado (*.moricard.com) e gerenciamento de pagamentos com Stripe."
+			},
+			"show_more": "Mostrar Mais",
+			"show_less": "Mostrar Menos"
+		},
+		"contact": {
+			"title": "Contato",
+			"h2": "Entre em contato",
+			"p": "Envie-me uma mensagem e entrarei em contato com você assim que possível.",
+			"name": "Nome",
+			"name_placeholder": "João da silva",
+			"email": "Email",
+			"email_placeholder": "joao@email.com",
+			"message": "Mensagem",
+			"message_placeholder": "Olá eu sou o joão, vamos colaborar em um projeto 👋",
+			"submit": "Enviar mensagem",
+			"success": "Mensagem enviada, entrarei em contato assim que possível",
+			"error": "Algo deu errado. Por favor, tente novamente mais tarde",
+			"loading": "Enviando..."
+		},
+		"experience": {
+			"title": "Experiência Profissional",
+			"logon": {
+				"role": "Desenvolvedor Full-stack",
+				"period": "Março 2022 – Presente",
+				"achievements": {
+					"payment": "Desenvolvi sistema de pagamento automatizado integrando 8 APIs bancárias com webhooks, substituindo processos manuais e impulsionando aquisição significativa de clientes através de parcerias bancárias expandidas",
+					"facial": "Construí sistema de controle de acesso por reconhecimento facial para escolas, permitindo rastreamento automatizado de presença dos alunos e processo seguro de retirada verificada pelos pais",
+					"api": "Projetei gateway de API REST para integrações de parceiros com permissões granulares de dados, autenticação baseada em token e registro abrangente de segurança"
+				}
+			}
+		}
+	},
+	"contact":{
+		"metadata": {
+			"title": "Contato"
+		}
+	},
+	"not_found": {
+		"metadata": {
+			"title": "Página não encontrada | Portfolio"
+		},
+		"h2": "Desculpe, a página não pode ser encontrada",
+		"p": "A página que você procurava parece ter sido movida, excluída ou não existe.",
+		"back": "Voltar ao portfólio"
+	},
+	"links" :{
+		"home": "Portfólio",
+		"contact": "Contato",
+		"resume": "Currículo"
+	}
+}

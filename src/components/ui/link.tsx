@@ -1,7 +1,7 @@
-import Link from "@/lib/I18n/link";
 import React from "react";
 import { BottomGradient } from "../bottom-gradient";
 import { cn } from "@/utils/cn";
+import { Link } from "@/i18n/routing";
 
 interface Props extends React.HTMLProps<HTMLAnchorElement> {
 	href: string;

@@ -1,0 +1,79 @@
+{
+	"portfolio": {
+		"metadata": {
+			"template": "%s | Portfolio",
+			"default": "Portfolio"
+		},
+		"hero": {
+			"hello": "初めまして 👋",
+			"into": "ケビン•ファベルです",
+			"title": "-ソフトウェアエンジニア-",
+			"contact": "Contact Me"
+		},
+		"skills": {
+			"title": "Skills"
+		},
+		"projects": {
+			"title": "Projects",
+			"fabel": {
+				"description": "組織の効率化を図るために設計された個人用タスク管理アプリ。カンバン方式を用いて、大きなプロジェクトを管理可能なタスクに細分化でき、追跡機能も活用できます。また、カレンダー上ではタスクの進捗記録が確認できます。"
+			},
+			"water_tracker": {
+				"description": "日々の水分摂取量を記録•確認するための個人向けアプリ。摂取した水の量と摂取日を入力することで、毎日の不足量や摂取量をトラッキングすることができます"
+			},
+			"vidsellr": {
+				"description": "クリエイターがプレビュー共有と購入後配信を通じてコンテンツを収益化できる動画マーケットプレイスプラットフォーム。AWS MediaConvert、S3、Lambda、EventBridgeを使用したサーバーレス動画処理パイプラインを設計し、ウォーターマーク付きの自動プレビュー生成を実現。プレビュー/完全動画のアクセス制御とStripe決済統合による安全なコンテンツ配信システムを実装。"
+			},
+			"moricard": {
+				"description": "Next.js、TypeScript、Tailwind CSSを使用したインタラクティブなアニメーション機能を備えたデジタルカードプラットフォーム。AWS S3の署名付きURLとプライベートバケットストレージを使用した安全な画像処理システムを実装。カスタムサブドメイン作成（*.moricard.com）やStripeサブスクリプション管理などのプレミアム機能を開発。"
+			},
+			"show_more": "もっと見る",
+			"show_less": "閉じる"
+		},
+		"contact": {
+			"title": "Contact",
+			"h2": "連絡する",
+			"p": "メッセージをお送りください。できるだけ早くご連絡いたします。",
+			"name": "名前",
+			"name_placeholder": "名前",
+			"email": "メール",
+			"email_placeholder": "メール",
+			"message": "メッセージ",
+			"message_placeholder": "こんにちは、プロジェクトで協力しましょう 👋",
+			"submit": "メッセージを送る",
+			"success": "メッセージを送信しました。できるだけ早く返信します",
+			"error": "何か問題が発生しました。 後でもう一度試してください",
+			"loading": "送信"
+		},
+		"experience": {
+			"title": "職務経歴",
+			"logon": {
+				"role": "フルスタック開発者",
+				"period": "2022年3月 – 現在",
+				"achievements": {
+					"payment": "8つの銀行APIをウェブフックで統合した自動決済システムを開発し、手動プロセスを置き換え、銀行パートナーシップの拡大により顧客獲得を促進",
+					"facial": "学校向けの顔認証アクセス管理システムを構築し、生徒の出席管理の自動化と保護者確認による安全な送迎プロセスを実現",
+					"api": "パートナー統合用のRESTful APIゲートウェイを設計し、詳細なデータ権限、トークンベースの認証、包括的なセキュリティログを実装"
+				}
+			}
+		}
+	},
+	"contact":{
+		"metadata": {
+			"title": "Contact"
+		}
+	},
+	"not_found": {
+		"metadata": {
+			"title": "ページが見つかりません | Portfolio"
+		},
+		"h2": "申し訳ありませんが、ページが見つかりません",
+		"p": "お探しのページは移動、削除されたか、存在しないようです。",
+		"back": "ポートフォリオに戻る"
+	},
+	"links" :{
+		"home": "Portfolio",
+		"contact": "Contact",
+		"resume": "履歴書"
+	}
+}

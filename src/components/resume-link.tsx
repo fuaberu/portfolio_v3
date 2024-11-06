@@ -1,15 +1,11 @@
 "use client";
 
-import { registerAction } from "@/app/actions";
 import { Button } from "@/components/ui/button";
+import { useTranslations } from "next-intl";
 
-interface Props {
-	translations: {
-		resume: string;
-	};
-}
 
-export const ResumeLink = ({ translations }: Props) => {
+export const ResumeLink = () => {
+	const t = useTranslations('links')
 	return (
 		<div className="group relative block self-stretch">
 			<div className="absolute inset-0 -z-10 rounded-md bg-teal-300"></div>
@@ -18,9 +14,9 @@ export const ResumeLink = ({ translations }: Props) => {
 				target="_blank"
 				rel="noreferrer"
 				className="flex h-full flex-col items-center justify-center rounded-md border border-teal-300 font-bold duration-200 group-hover:-translate-x-1 group-hover:-translate-y-1"
-				onClick={() => registerAction({ action: "download-resume" })}
+				// onClick={() => registerAction({ action: "download-resume" })}
 			>
-				<Button variant="outline">{translations.resume}</Button>
+				<Button variant="outline">{t('resume')}</Button>
 			</a>
 		</div>
 	);

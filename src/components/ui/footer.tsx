@@ -1,25 +1,21 @@
 import Image from "next/image";
 import { AppLink } from "./link";
-import { ModeToggle } from "@/components/mode-toggle";
-import { Theme } from "@/types";
+import { ThemePicker } from "@/components/mode-toggle";
 import { ResumeLink } from "@/components/resume-link";
 import { cn } from "@/lib/utils";
 import LanguageSwitcher from "../language-switcher";
+import { JSX } from "react";
 
 interface Props {
-	theme: Theme;
 	isAgency?: boolean;
 	navItems: {
 		name: string;
 		link: string;
 		icon?: JSX.Element;
 	}[];
-	translations: {
-		resume: string;
-	};
 }
 
-const Footer = ({ theme, isAgency, navItems, translations }: Props) => {
+const Footer = ({ isAgency, navItems }: Props) => {
 	return (
 		<footer className="border-t border-neutral-100 p-6 dark:border-white/[0.1]">
 			<div className="mx-auto flex max-w-screen-2xl justify-between">
@@ -30,8 +26,10 @@ const Footer = ({ theme, isAgency, navItems, translations }: Props) => {
 					<p>© {new Date().getFullYear()} Kevin Fabel</p>
 					<div className="flex items-center gap-2">
 						<LanguageSwitcher />
-						<ModeToggle theme={theme} text={false} />
-						{!isAgency && <ResumeLink translations={translations} />}
+						<ThemePicker />
+						{/*
+						 */}
+						{!isAgency && <ResumeLink />}
 					</div>
 				</div>
 				<nav className="flex flex-col justify-evenly">
